@@ -4,40 +4,22 @@
         Title="Welcome board" Height="700" Width="700">
     
     <DockPanel LastChildFill="True" Background="#FFECECEC">
-        <Grid>
+        <Grid Margin="0,-30,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="100"/>
+                <RowDefinition Height="30"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <TextBlock Text="Shoot'em up Maker" FontSize="36" FontWeight="Thin" HorizontalAlignment="Center" VerticalAlignment="Center"  />
-            <ScrollViewer x:Name="ThumbnailsViewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" ToolTip="(Images found will be shown here)" Grid.RowSpan="2" Grid.Row="1">
+            <TextBlock FontSize="22" FontWeight="Thin" VerticalAlignment="Bottom" Grid.Row="1" HorizontalAlignment="Center"  ><Run Language="fr-fr" Text="5 games created."/></TextBlock>
+            <ScrollViewer x:Name="ThumbnailsViewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" ToolTip="(Images found will be shown here)" Grid.Row="2">
                 <WrapPanel x:Name="Thumbnails" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <Rectangle Width="140" Height="260" Fill="Red" Margin="5,5">
-                        <Rectangle.Effect>
-                            <DropShadowEffect BlurRadius="3" ShadowDepth="1" RenderingBias="Quality" Direction="90" Color="#FFB3B3B3" Opacity="0.425"/>
-                        </Rectangle.Effect>
-                    </Rectangle>
-                    <Rectangle Width="140" Height="260" Fill="Red" Margin="5,5">
-                        <Rectangle.Effect>
-                            <DropShadowEffect BlurRadius="3" ShadowDepth="1" RenderingBias="Quality" Direction="90" Color="#FFB3B3B3" Opacity="0.425"/>
-                        </Rectangle.Effect>
-                    </Rectangle>
-                    <Rectangle Width="140" Height="260" Fill="Red" Margin="5,5">
-                        <Rectangle.Effect>
-                            <DropShadowEffect BlurRadius="3" ShadowDepth="1" RenderingBias="Quality" Direction="90" Color="#FFB3B3B3" Opacity="0.425"/>
-                        </Rectangle.Effect>
-                    </Rectangle>
-                    <Rectangle Width="140" Height="260" Fill="Red" Margin="5,5">
-                        <Rectangle.Effect>
-                            <DropShadowEffect BlurRadius="3" ShadowDepth="1" RenderingBias="Quality" Direction="90" Color="#FFB3B3B3" Opacity="0.425"/>
-                        </Rectangle.Effect>
-                    </Rectangle>
-                    <Rectangle Width="140" Height="260" Fill="Red" Margin="5,5">
-                        <Rectangle.Effect>
-                            <DropShadowEffect BlurRadius="3" ShadowDepth="1" RenderingBias="Quality" Direction="90" Color="#FFB3B3B3" Opacity="0.425"/>
-                        </Rectangle.Effect>
-                    </Rectangle>
-                    <Border Width="140" Height="260" Background="#FF525252">
+                    <Rectangle Width="140" Height="260" Fill="Red" Margin="5,5"></Rectangle>
+                    <Rectangle Width="140" Height="260" Fill="Red" Margin="5,5"></Rectangle>
+                    <Rectangle Width="140" Height="260" Fill="Red" Margin="5,5"></Rectangle>
+                    <Rectangle Width="140" Height="260" Fill="Red" Margin="5,5"></Rectangle>
+                    <Rectangle Width="140" Height="260" Fill="Red" Margin="5,5"></Rectangle>
+                    <Border Width="140" Height="260" Margin="5,5" Background="#FF525252">
                         <TextBlock x:Name="CreateButton" Text="+" HorizontalAlignment="Center" VerticalAlignment="Center" ToolTip="Click here to create a new game" FontSize="36" Foreground="White" FontWeight="Thin" />
                     </Border>
                 </WrapPanel>
