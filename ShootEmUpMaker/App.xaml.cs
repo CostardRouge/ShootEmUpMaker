@@ -24,7 +24,7 @@ namespace ShootEmUpMaker
 
             // Init events
             this.welcomeWindow.CreateButton.MouseDown += CreateButton_MouseDown;
-            this.welcomeWindow.Closed+=welcomeWindow_Closed;
+            //this.welcomeWindow.Closed+=welcomeWindow_Closed;
             
         }
 

@@ -47,14 +47,13 @@
     </Window.Resources>
 
     <DockPanel LastChildFill="True" Background="#FFECECEC">
-
         <ListBox SelectedIndex="0" DockPanel.Dock="Top" BorderBrush="#FFA41818" BorderThickness="0,0,0,1" ItemsPanel="{DynamicResource Banner}" Background="#FFCD3737" Height="35">
             <ListBox.Effect>
                 <DropShadowEffect ShadowDepth="2" Direction="270" BlurRadius="3" Opacity="0.175"/>
             </ListBox.Effect>
-            <ListBoxItem Content="Step 1" Template="{DynamicResource BannerItem}" ToolTip="Show as list." ScrollViewer.VerticalScrollBarVisibility="Disabled" IsEnabled="False" ></ListBoxItem>
-            <ListBoxItem Content="Step 2" Template="{DynamicResource BannerItem}" ToolTip="Show as thumbnails." ></ListBoxItem>
-            <ListBoxItem Content="Step 3" Template="{DynamicResource BannerItem}" ToolTip="Show as list and thumbnails." IsEnabled="False" ></ListBoxItem>
+            <ListBoxItem Content="Step 1"  ToolTip="Show as list." ScrollViewer.VerticalScrollBarVisibility="Disabled" IsEnabled="False" ></ListBoxItem>
+            <ListBoxItem Content="Step 2"  ToolTip="Show as thumbnails." ></ListBoxItem>
+            <ListBoxItem Content="Step 3"  ToolTip="Show as list and thumbnails." IsEnabled="False" ></ListBoxItem>
         </ListBox>
         <!--
         <Border DockPanel.Dock="Bottom" BorderThickness="0,1,0,0" BorderBrush="#FFF1F1F1">
