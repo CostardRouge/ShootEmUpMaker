@@ -30,4 +30,4 @@ All releases are here : https://github.com/CostardRouge/ShootEmUpMaker/releases
 * Steeve Pommier ([Github](https://github.com/CostardRouge) / [Twitter](https://twitter.com/LeBlousonRouge))
 * Juju013 ([Github](https://github.com/Juju013))
 * alex-ng ([Github](https://github.com/alex-ng))
-* dagasa_c ([Github](https://github.com/))
+* dagasan ([Github](https://github.com/dagasan))
