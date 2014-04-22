@@ -2,11 +2,11 @@ Shoot'em up Maker
 ====
 > A game tool project for BJTU.
 
-![Example](Assets/v0.jpg "screenshoot")
+![Example](Assets/v0.PNG "screenshoot")
 
 ### Download
 
-* [Download ShootEmUpMaker - version 0.0.0](/ "Last version")
+* (soon)
 
 ### How to use
 
