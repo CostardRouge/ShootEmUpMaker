@@ -10,7 +10,6 @@ namespace ShootEmUpMaker
     {
         string _wallpaper { get; set; }
         string _music { get; set; }
-        UserShip _player;
         List<EnemyShip> _enemy;
     }
 }
