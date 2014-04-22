@@ -2,7 +2,7 @@ Shoot'em up Maker
 ====
 > A game tool project for BJTU.
 
-![Example](Assets/v0.PNG "screenshoot")
+![Example](Assets/v0.jpg "screenshoot")
 
 ### Download
 
