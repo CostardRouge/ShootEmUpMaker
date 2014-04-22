@@ -1,9 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShootEmUpLauncher", "ShootEmUpLauncher\ShootEmUpLauncher.csproj", "{4C74CD62-5540-4109-8B7D-2FF967B08AE9}"
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShootEmUpLauncher", "ShootEmUpLauncher\ShootEmUpLauncher.csproj", "{B3C4D9C7-6CE7-44B6-85C9-20F1BDEB39D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +9,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4C74CD62-5540-4109-8B7D-2FF967B08AE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4C74CD62-5540-4109-8B7D-2FF967B08AE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4C74CD62-5540-4109-8B7D-2FF967B08AE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4C74CD62-5540-4109-8B7D-2FF967B08AE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3C4D9C7-6CE7-44B6-85C9-20F1BDEB39D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3C4D9C7-6CE7-44B6-85C9-20F1BDEB39D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3C4D9C7-6CE7-44B6-85C9-20F1BDEB39D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3C4D9C7-6CE7-44B6-85C9-20F1BDEB39D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
