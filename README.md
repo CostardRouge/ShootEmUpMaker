@@ -1,41 +1,33 @@
-Piny
+Shoot'em up Maker
 ====
-> A tool to download images from Pinterest boards.
+	A game tool project for BJTU.
 
-![Example](Assets/PinySS.PNG "Piny screenshoot")
+![Example](Assets/v0.PNG "screenshoot")
 
+---
 ### Download
 
-* [Donwload Piny - version 0.4.0](https://github.com/CostardRouge/Piny/releases/download/0.4.0/Piny-v0.4.0.zip "Fourth release")
-* [Donwload Piny - version 0.3.0](https://github.com/CostardRouge/Piny/releases/download/0.3.0/Piny-v0.3.0-Windows.zip "Third release")
-* [Donwload Piny - version 0.2.0](https://github.com/CostardRouge/Piny/releases/download/0.2.0/Piny-v0.2.0-Windows.zip "Second release")
-* [Donwload Piny - version 0.1.0](https://github.com/CostardRouge/Piny/releases/download/0.1.0/Piny-v0.1.0-Windows.zip "First release")
+	[Download ShootEmUpMaker - version 0.0.0](/ "Last version")
 
 ### How to use
 
-1. Enter the board URL
-2. Click to scan (images found will be shown as thumbnails)
-3. Choose a folder
-4. Click on the Download! button
-5. Enjoy :)
+1. --
+2. --
+3. --
+4. --
+5. --
 
-### Todo
+## Todo
 
-* Support infinite scroll page
-* Download from anypage page of the site.
-* Options to create a folder with the board name.
-* Options to also save the thumbnails ?!
-* Handles exceptions
+* --
+* --
 
 ### Release history
 
-All releases are here : https://github.com/CostardRouge/Piny/releases
+All releases are here : https://github.com/CostardRouge/ShootEmUpMaker/releases
 
-### Author
-> Steeve Pommier
-
-* [Github](https://github.com/CostardRouge)
-* [Twitter](https://twitter.com/LeBlousonRouge)
-* [Website](http://www.mncorp.net)
-* [Dev Tumblr](http://lastrevision.tumblr.com)
-* [Main Tumblr](http://costardrouge.tumblr.com/)
+### Authors
+* Steeve Pommier ([Github](https://github.com/CostardRouge) / [Twitter](https://twitter.com/LeBlousonRouge))
+* Juju013 ([Github](https://github.com/Juju013))
+* alex-ng ([Github](https://github.com/alex-ng))
+* dagasa_c ([Github](https://github.com/))
