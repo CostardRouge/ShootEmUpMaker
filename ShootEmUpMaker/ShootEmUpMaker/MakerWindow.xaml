@@ -37,15 +37,15 @@
                         <VisualState x:Name="Focused"/>
                     </VisualStateGroup>
                 </VisualStateManager.VisualStateGroups>
-                <Label x:Name="label" Content="{TemplateBinding Content}" Margin="0" Width="{TemplateBinding Width}" FontWeight="Bold" Foreground="White" Cursor="Hand" Background="#00136636" BorderBrush="Black" />
+                <Label x:Name="label" Content="{TemplateBinding Content}" Margin="0" Width="{TemplateBinding Width}" FontWeight="Thin" Foreground="White" Cursor="Hand" Background="#00136636" BorderBrush="Black" />
             </Grid>
         </ControlTemplate>
     </Window.Resources>
 
     <DockPanel LastChildFill="True" Background="#FFECECEC">
         <ListBox SelectedIndex="0" DockPanel.Dock="Top" BorderBrush="#FFA41818" BorderThickness="0,0,0,1" ItemsPanel="{DynamicResource Banner}" Background="#FFCD3737" Height="35">
-            <ListBoxItem Content="Preview game" Template="{DynamicResource BannerItem}" ToolTip="Show as thumbnails." ></ListBoxItem>
-            <ListBoxItem Content="Export game" Template="{DynamicResource BannerItem}" ToolTip="Show as list and thumbnails." ></ListBoxItem>
+            <ListBoxItem Content="Preview game" Template="{DynamicResource BannerItem}" ToolTip="Preview the current game..." ></ListBoxItem>
+            <ListBoxItem Content="Export game" Template="{DynamicResource BannerItem}" ToolTip="Export the current game..." ></ListBoxItem>
         </ListBox>
         <!--
         <Border DockPanel.Dock="Bottom" BorderThickness="0,1,0,0" BorderBrush="#FFF1F1F1">
@@ -60,34 +60,84 @@
         </Border>
         -->
 
-           <ScrollViewer x:Name="ThumbnailsViewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Padding="0,0,0,5" Background="White" Width="172">
-                <StackPanel>
-                <TextBlock Background="#FF525252"
-                            Text="Menu" VerticalAlignment="Center" 
-                           ToolTip="Click here to create a new game" FontSize="18" 
-                           Foreground="White" FontWeight="Thin" Height="80" Margin="5,5,5,0"/>
+           <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Padding="0,0,0,5" Background="White" Width="172">
+            <StackPanel x:Name="PanelSwitcher">
+                <TextBlock
+                        x:Name="GeneralSettingsTextBlock"
+                        Text="Game general settings" VerticalAlignment="Center" Background="#FF525252"
+                        ToolTip="Click here to create a new game" FontSize="18" 
+                        Foreground="White" FontWeight="Thin" Height="160" Margin="5,5,5,0" TextWrapping="Wrap" Padding="10,20"/>
+
+                <TextBlock
+                        x:Name="MenuAndPlayerTextBlock"
+                        Text="Menu and player settings" VerticalAlignment="Center" Background="#FF525252"
+                        ToolTip="Click here to create a new game" FontSize="18" 
+                        Foreground="White" FontWeight="Thin" Height="160" Margin="5,5,5,0" TextWrapping="Wrap" Padding="10,20"/>
+
+                <TextBlock
+                        x:Name="LevelTextBlock"
+                        Text="Level #1" VerticalAlignment="Center" Background="#FF525252"
+                        ToolTip="Click here to create a new game" FontSize="18" 
+                        Foreground="White" FontWeight="Thin" Height="160" Margin="5,5,5,0" TextWrapping="Wrap" Padding="10,20"/>
+
+                <TextBlock
+                        x:Name="CreateNewLevelButton"
+                        Text="Add a new level..." VerticalAlignment="Center" Background="#FF525252"
+                        ToolTip="Click here to create a new game" FontSize="18" 
+                        Foreground="White" FontWeight="Thin" Height="160" Margin="5,5,5,0" TextWrapping="Wrap" Padding="10,20"/>
 
 
-                <TextBlock Background="#FF525252"
-                           Text="Level 1" VerticalAlignment="Center" 
-                           ToolTip="Click here to create a new game" FontSize="18" 
-                           Foreground="White" FontWeight="Thin" Height="80" Margin="5,5,5,0"/>
+            </StackPanel>
 
-                <TextBlock x:Name="CreateNewLevelButton" Background="#FF525252"
-                           Text="+" VerticalAlignment="Center" 
-                           ToolTip="+" FontSize="18" 
-                           Foreground="White" FontWeight="Thin" Height="80" Margin="5,5,5,0"/>
-                   
-                </StackPanel>
-
-            </ScrollViewer>
+        </ScrollViewer>
         
-        <Grid>
-            <Label x:Name="InformationsText" HorizontalAlignment="Center" VerticalAlignment="Center">
-                content
-            </Label>
+        <Grid x:Name="Panels">
+            <StackPanel x:Name="GeneralSettingsPanel" Visibility="Hidden" Margin="100,0">
+                <Label HorizontalAlignment="Center" VerticalAlignment="Center">
+                    Game name :
+                </Label>
+                <TextBox x:Name="gameNameTextBox" />
 
-            
+                <Label HorizontalAlignment="Center" VerticalAlignment="Center">
+                    Game description :
+                </Label>
+                <TextBox x:Name="gameDescriptionTextbox" />
+
+                <Label HorizontalAlignment="Center" VerticalAlignment="Center">
+                    Game author :
+                </Label>
+                <TextBox x:Name="gameAuthorTextbox" />
+            </StackPanel>
+
+            <StackPanel x:Name="MenuAndPlayerPanel" Visibility="Hidden" Margin="100,0">
+                <Label HorizontalAlignment="Center" VerticalAlignment="Center">
+                    Player sprite :
+                </Label>
+                <TextBox x:Name="playerSpriteTextBox" />
+
+                <Label HorizontalAlignment="Center" VerticalAlignment="Center">
+                    Weapon sprite :
+                </Label>
+                <TextBox x:Name="weaponSpriteTextbox" />
+
+                <Label HorizontalAlignment="Center" VerticalAlignment="Center">
+                    Player life :
+                </Label>
+                <TextBox x:Name="playerLifeTextbox" />
+            </StackPanel>
+
+            <StackPanel x:Name="LevelPanel" Visibility="Hidden" Margin="100,0">
+                <Label HorizontalAlignment="Center" VerticalAlignment="Center">
+                    Level name :
+                </Label>
+                <TextBox x:Name="levelNameTextBox" />
+
+                <Label HorizontalAlignment="Center" VerticalAlignment="Center">
+                    Level description :
+                </Label>
+                <TextBox x:Name="levelDescriptionTextbox" />
+
+            </StackPanel>
         </Grid>
 
     </DockPanel>
