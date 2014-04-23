@@ -6,10 +6,15 @@ using System.Threading.Tasks;
 
 namespace ShootEmUpMaker
 {
-    class Level
+    public class Level
     {
-        string _wallpaper { get; set; }
-        string _music { get; set; }
-        List<EnemyShip> _enemy;
-    }
+        public string _wallpaper { get; set; }
+        public string _music { get; set; }
+        public List<EnemyShip> _enemy;
+
+        public Level()
+        {
+        this._enemy = new List<EnemyShip>();
+        }
+    }   
 }

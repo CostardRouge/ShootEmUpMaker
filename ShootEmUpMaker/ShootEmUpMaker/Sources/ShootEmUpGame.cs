@@ -6,15 +6,23 @@ using System.Threading.Tasks;
 
 namespace ShootEmUpMaker
 {
-    class ShootEmUpGame
+    public class ShootEmUpGame
     {
-        string _gameName { get; set; }
-        string _author { get; set; }
-        string _descrption { get; set; }
-        enum _orientation
+        public string _gameName { get; set; }
+        public string _author { get; set; }
+        public string _descrption { get; set; }
+        public enum E_orientation
         {
-            Horizontal,
-            Vertical
+            Horizontal = 0,
+            Vertical = 1
         };
+        public UserShip _player { get; set; }
+        public List<Level> _level { get; set; }
+        public E_orientation _orientation { get; set; }
+
+        public ShootEmUpGame()
+        {
+            this._level = new List<Level>();
+        }
     }
 }
