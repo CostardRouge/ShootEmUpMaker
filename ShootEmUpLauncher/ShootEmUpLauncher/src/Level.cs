@@ -8,9 +8,10 @@ namespace ShootEmUpLauncher
 {
     class Level
     {
-        string _wallpaper { get; set; }
-        string _music { get; set; }
-        UserShip _player;
-        List<EnemyShip> _enemy;
+        public string _wallpaper { get; set; }
+        public string _music { get; set; }
+        public UserShip _player;
+        public List<EnemyShip> _enemy;
     }
+
 }

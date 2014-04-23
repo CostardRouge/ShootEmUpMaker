@@ -12,29 +12,69 @@ namespace ShootEmUpLauncher
 {
     class Core
     {
-        private string      _name = "abc";
-        private string      _author = "auteur";
-        private string      _description = "blablabla";
-        private int         _orientation = 0;
-        private UserShip    _player;
-        private List<Level> _levels;
+        private string          _name;
+        private string          _author;
+        private string          _description;
+        private int             _orientation;
+        private uint            _x;
+        private uint            _y;
+        private bool            _quit = false;
+        private List<IObject>   _objects;
+
+        private UserShipSprite  _player;
+        private List<Level>     _levels;
+
+        public Core()
+        {
+            _name = "nom du jeu";
+            _author = "auteur du jeu";
+            _description = "blablabla";
+            _orientation = 0;
+            _x = 600;
+            _y = 800;
+            // récupération du XML ?
+        }
 
         static void Main()
         {
-            // Récupérer données du jeu
             Core game = new Core();
+
+            /* Test à effacer */
+            /*
+            SFML.Graphics.Sprite sprt = new Sprite();
+            sprt.Texture = new Texture("ship.png", new SFML.Graphics.IntRect(10, 10, 32, 32));
+            */
+
+            UserShip user = new UserShip();
+            user._shipSprite = "ship.png";
+            UserShipSprite ship = new UserShipSprite(user);
+
+
+            SFML.Window.VideoMode vmode = new VideoMode(game._y, game._x, 32);
+            SFML.Graphics.RenderWindow win = new RenderWindow(vmode, game._name);
+
+            game._objects = new List<IObject>();
             // Set X et Y de la fenêtre (ici random..)
-            uint x = 600;
-            uint y = 800;
-
-            if (game._orientation == 0) // 0 = Vertical
+            while (!game._quit)
             {
-                x = 500;
-                y = 800;
+                ship.update();
+                win.Clear();
+                win.Draw(ship._shipSprite);
+                win.Display();
+
+                game.game_exit();
+                
+                // 
+                //game._objects.Select(item => item.update());
+                //game._objects.Select(item => item.show());
             }
-
-            SFML.Window.Window window = new SFML.Window.Window(new VideoMode(y, x), game._name);
-
         }
+
+        void game_exit()
+        {
+            if (SFML.Window.Keyboard.IsKeyPressed(SFML.Window.Keyboard.Key.Escape))
+                this._quit = true;
+        }
+
     }
 }
