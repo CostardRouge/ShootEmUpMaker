@@ -27,5 +27,16 @@ namespace ShootEmUpMaker
                 xs.Serialize(wr, myGame);
             }
         }
+
+        public static ShootEmUpGame ImportGame(string path)
+        {
+            ShootEmUpGame myGame;
+            XmlSerializer xs = new XmlSerializer(typeof(ShootEmUpGame));
+            using (TextReader tr = new StringReader(path))
+            {
+                myGame = (ShootEmUpGame)xs.Deserialize(tr);
+            }
+            return myGame;
+        }
     }
 }
