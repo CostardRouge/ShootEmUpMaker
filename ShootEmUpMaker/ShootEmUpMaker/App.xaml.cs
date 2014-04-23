@@ -19,18 +19,30 @@ namespace ShootEmUpMaker
             // Init attributes
             this.welcomeWindow = new ShootEmUpMaker.WelcomeWindow();
             this.makerWindow = new ShootEmUpMaker.MakerWindow();
+
+            // Showing default windows
             this.welcomeWindow.Show();
 
-
             // Init events
-            this.welcomeWindow.CreateButton.MouseDown += CreateButton_MouseDown;
-            //this.welcomeWindow.Closed+=welcomeWindow_Closed;
-            
+            this.welcomeWindow.CreateButton.MouseDown += CreateNewGame;
+            this.welcomeWindow.Closed += welcomeWindowClosed;
+            this.makerWindow.Closed += makerWindowClosed; // this is temporary
         }
 
-        void CreateButton_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        void welcomeWindowClosed(object sender, EventArgs e)
         {
-            this.welcomeWindow.Visibility = Visibility.Hidden;
+            App.Current.Shutdown(0);
+        }
+
+        void makerWindowClosed(object sender, EventArgs e)
+        {
+            this.welcomeWindow.Show();
+            this.makerWindow.Hide();
+        }
+
+        void CreateNewGame(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            this.welcomeWindow.Hide();
             this.makerWindow.Show();
         }
         #endregion

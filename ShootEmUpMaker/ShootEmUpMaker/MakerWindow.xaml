@@ -37,11 +37,7 @@
                         <VisualState x:Name="Focused"/>
                     </VisualStateGroup>
                 </VisualStateManager.VisualStateGroups>
-                <Label x:Name="label" Content="{TemplateBinding Content}" Margin="0" Width="{TemplateBinding Width}" FontWeight="Bold" Foreground="White" Cursor="Hand" Background="#00136636" BorderBrush="Black">
-                    <Label.Effect>
-                        <DropShadowEffect BlurRadius="2" ShadowDepth="0" RenderingBias="Quality" Direction="0"/>
-                    </Label.Effect>
-                </Label>
+                <Label x:Name="label" Content="{TemplateBinding Content}" Margin="0" Width="{TemplateBinding Width}" FontWeight="Bold" Foreground="White" Cursor="Hand" Background="#00136636" BorderBrush="Black" />
             </Grid>
         </ControlTemplate>
     </Window.Resources>
@@ -51,9 +47,9 @@
             <ListBox.Effect>
                 <DropShadowEffect ShadowDepth="2" Direction="270" BlurRadius="3" Opacity="0.175"/>
             </ListBox.Effect>
-            <ListBoxItem Content="Step 1"  ToolTip="Show as list." ScrollViewer.VerticalScrollBarVisibility="Disabled" IsEnabled="False" ></ListBoxItem>
-            <ListBoxItem Content="Step 2"  ToolTip="Show as thumbnails." ></ListBoxItem>
-            <ListBoxItem Content="Step 3"  ToolTip="Show as list and thumbnails." IsEnabled="False" ></ListBoxItem>
+            <ListBoxItem Content="Step 1" Template="{DynamicResource BannerItem}" ToolTip="Show as list." ScrollViewer.VerticalScrollBarVisibility="Disabled" ></ListBoxItem>
+            <ListBoxItem Content="Step 2" Template="{DynamicResource BannerItem}" ToolTip="Show as thumbnails." ></ListBoxItem>
+            <ListBoxItem Content="Step 3" Template="{DynamicResource BannerItem}" ToolTip="Show as list and thumbnails." ></ListBoxItem>
         </ListBox>
         <!--
         <Border DockPanel.Dock="Bottom" BorderThickness="0,1,0,0" BorderBrush="#FFF1F1F1">
