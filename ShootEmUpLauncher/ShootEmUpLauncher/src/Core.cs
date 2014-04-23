@@ -17,10 +17,11 @@ namespace ShootEmUpLauncher
         private string          _name;
         private string          _author;
         private string          _description;
-        private orientation     _orientation;
         private uint            _x;
         private uint            _y;
-        private List<IObject>   _objects;
+
+        public orientation _orientation { get; set; }
+        public List<IObject>   _objects { get; set; }
 
         private UserShipSprite  _player;
         private List<Level>     _levels;
@@ -44,32 +45,33 @@ namespace ShootEmUpLauncher
 
             window.Closed += new EventHandler(OnClose);
             window.KeyPressed += new EventHandler<KeyEventArgs>(OnKeyPressed);
+
             /* Test à effacer */
             EnemyShip enemy = new EnemyShip();
             enemy._shipSprite = "ship.png";
-            EnemyShipSprite enship = new EnemyShipSprite(enemy, game._orientation);
+            EnemyShipSprite enship = new EnemyShipSprite(enemy);
 
             UserShip user = new UserShip();
+            user._fireRate = 1;
             user._shipSprite = "ship.png";
-            UserShipSprite ship = new UserShipSprite(user, game._orientation);
+            user._weaponSprite = "ship.png";
+            UserShipSprite ship = new UserShipSprite(user);
             /**/
             
             game._objects = new List<IObject>();
+            game._objects.Add(enship);
+            game._objects.Add(ship);
 
             while (window.IsOpen())
             {
                 window.DispatchEvents();
-
-                ship.update();
-                enship.update();
-
                 window.Clear();
-                window.Draw(ship._shipSprite);
-                window.Draw(enship._shipSprite);
+                for (var x = 0; x < game._objects.Count; x++)
+                {
+                    game._objects[x].show(window);
+                    game._objects[x].update(window, game._orientation, game._objects);
+                }
                 window.Display();
-                // 
-                //game._objects.Select(item => item.update(_orientation));
-                //game._objects.Select(item => item.show(window));
             }
         }
 

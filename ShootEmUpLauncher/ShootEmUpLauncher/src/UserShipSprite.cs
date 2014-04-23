@@ -10,43 +10,41 @@ namespace ShootEmUpLauncher
     {
         UserShip _userShipData;
         public int _life { get; set; }
-        public SFML.Graphics.Sprite _shipSprite { get; set; }
-        public SFML.Graphics.Sprite _weaponSprite { get; set; }
-        public orientation _orientation;
+        public SFML.Graphics.Sprite _sprite { get; set; }
 
-        public UserShipSprite(UserShip data, orientation or)
+        public UserShipSprite(UserShip data)
         {
-            _shipSprite = new SFML.Graphics.Sprite();
+            _sprite = new SFML.Graphics.Sprite();
             _userShipData = data;
             _life = data._life;
-            _orientation = or;
-            _shipSprite.Texture = new SFML.Graphics.Texture(data._shipSprite, new SFML.Graphics.IntRect(10, 10, 32, 32));
-            // _weaponSprite.Texture = new SFML.Graphics.Texture(data._weaponSprite);
-            _shipSprite.Position = new SFML.Window.Vector2f(50, 50);
+            _sprite.Texture = new SFML.Graphics.Texture(data._shipSprite, new SFML.Graphics.IntRect(10, 10, 32, 32));
+            _sprite.Position = new SFML.Window.Vector2f(50, 50);
         }
 
 
         public void show(SFML.Graphics.RenderWindow window)
         {
-            window.Draw(_shipSprite);
-            // window.Draw(_weaponSprite);
+            window.Draw(_sprite);
         }
 
-        public void update()
+        public List<IObject> update(SFML.Graphics.RenderWindow window, orientation orientation, List<IObject> list)
         {
-            // Check que ça ne dépasse pas la fenêtre
-            if (SFML.Window.Keyboard.IsKeyPressed(SFML.Window.Keyboard.Key.Left))
-                _shipSprite.Position = new SFML.Window.Vector2f(_shipSprite.Position.X - 0.1f, _shipSprite.Position.Y);
-            else if (SFML.Window.Keyboard.IsKeyPressed(SFML.Window.Keyboard.Key.Right))
-                _shipSprite.Position = new SFML.Window.Vector2f(_shipSprite.Position.X + 0.1f, _shipSprite.Position.Y);
-            else if (SFML.Window.Keyboard.IsKeyPressed(SFML.Window.Keyboard.Key.Up))
-                _shipSprite.Position = new SFML.Window.Vector2f(_shipSprite.Position.X, _shipSprite.Position.Y - 0.1f);
-            else if (SFML.Window.Keyboard.IsKeyPressed(SFML.Window.Keyboard.Key.Down))
-                _shipSprite.Position = new SFML.Window.Vector2f(_shipSprite.Position.X, _shipSprite.Position.Y + 0.1f);
+            if (SFML.Window.Keyboard.IsKeyPressed(SFML.Window.Keyboard.Key.Left) && (_sprite.Position.X - 0.1f > 0))
+                _sprite.Position = new SFML.Window.Vector2f(_sprite.Position.X - 0.1f, _sprite.Position.Y);
+            else if (SFML.Window.Keyboard.IsKeyPressed(SFML.Window.Keyboard.Key.Right) && (_sprite.Position.X + 0.1f < window.Size.X - 32)) // !!! Moins la taille du sprite
+                _sprite.Position = new SFML.Window.Vector2f(_sprite.Position.X + 0.1f, _sprite.Position.Y);
+            else if (SFML.Window.Keyboard.IsKeyPressed(SFML.Window.Keyboard.Key.Up) && (_sprite.Position.Y - 0.1f > 0))
+                _sprite.Position = new SFML.Window.Vector2f(_sprite.Position.X, _sprite.Position.Y - 0.1f);
+            else if (SFML.Window.Keyboard.IsKeyPressed(SFML.Window.Keyboard.Key.Down) && (_sprite.Position.Y + 0.1f < window.Size.Y - 32))
+                _sprite.Position = new SFML.Window.Vector2f(_sprite.Position.X, _sprite.Position.Y + 0.1f);
             else if (SFML.Window.Keyboard.IsKeyPressed(SFML.Window.Keyboard.Key.Space))
-            {
-                // shot ? Création d'un objet de tir ?
-            }
+                list.Add(new Shot(_sprite.Position, _userShipData._weaponSprite, _userShipData._damage, _userShipData._fireRate));
+            return list;
+        }
+
+        public bool isEnemy()
+        {
+            return false;
         }
     }
 }

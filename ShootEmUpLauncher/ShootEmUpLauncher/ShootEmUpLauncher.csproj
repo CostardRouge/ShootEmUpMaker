@@ -67,7 +67,6 @@
     <Compile Include="src\Shot.cs" />
     <Compile Include="src\EnemyShipSprite.cs" />
     <Compile Include="src\UserShipSprite.cs" />
-    <Compile Include="src\LevelSprite.cs" />
     <Compile Include="src\Core.cs" />
     <Compile Include="src\EnemyShip.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
