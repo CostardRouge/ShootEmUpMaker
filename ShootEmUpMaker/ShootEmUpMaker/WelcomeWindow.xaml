@@ -13,7 +13,7 @@
             <TextBlock Text="Shoot'em up Maker" FontSize="36" FontWeight="Thin" HorizontalAlignment="Center" VerticalAlignment="Center"  />
             <TextBlock FontSize="22" FontWeight="Thin" VerticalAlignment="Bottom" Grid.Row="1" HorizontalAlignment="Center"  ><Run Language="fr-fr" Text="5 games created."/></TextBlock>
             <ScrollViewer x:Name="ThumbnailsViewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" ToolTip="(Images found will be shown here)" Grid.Row="2">
-                <WrapPanel x:Name="Thumbnails" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <WrapPanel x:Name="Games" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <Rectangle Width="140" Height="260" Fill="Red" Margin="5,5"></Rectangle>
                     <Rectangle Width="140" Height="260" Fill="Red" Margin="5,5"></Rectangle>
                     <Rectangle Width="140" Height="260" Fill="Red" Margin="5,5"></Rectangle>
