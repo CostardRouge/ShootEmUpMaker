@@ -12,13 +12,14 @@ namespace ShootEmUpLauncher
         public int _life { get; set; }
         public SFML.Graphics.Sprite _shipSprite { get; set; }
         public SFML.Graphics.Sprite _weaponSprite { get; set; }
+        public orientation _orientation;
 
-        public UserShipSprite(UserShip data)
+        public UserShipSprite(UserShip data, orientation or)
         {
             _shipSprite = new SFML.Graphics.Sprite();
             _userShipData = data;
             _life = data._life;
-
+            _orientation = or;
             _shipSprite.Texture = new SFML.Graphics.Texture(data._shipSprite, new SFML.Graphics.IntRect(10, 10, 32, 32));
             // _weaponSprite.Texture = new SFML.Graphics.Texture(data._weaponSprite);
             _shipSprite.Position = new SFML.Window.Vector2f(50, 50);
@@ -44,7 +45,7 @@ namespace ShootEmUpLauncher
                 _shipSprite.Position = new SFML.Window.Vector2f(_shipSprite.Position.X, _shipSprite.Position.Y + 0.1f);
             else if (SFML.Window.Keyboard.IsKeyPressed(SFML.Window.Keyboard.Key.Space))
             {
-                // shot ? Création d'un objet de tir et thread ?
+                // shot ? Création d'un objet de tir ?
             }
         }
     }
