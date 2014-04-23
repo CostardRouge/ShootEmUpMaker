@@ -53,6 +53,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Sources\EnemyShip.cs" />
+    <Compile Include="Sources\Level.cs" />
+    <Compile Include="Sources\ShootEmUpGame.cs" />
+    <Compile Include="Sources\UserShip.cs" />
     <Compile Include="WelcomeWindow.xaml.cs">
       <DependentUpon>WelcomeWindow.xaml</DependentUpon>
     </Compile>
