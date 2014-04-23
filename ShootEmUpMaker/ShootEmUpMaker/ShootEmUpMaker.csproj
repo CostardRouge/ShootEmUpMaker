@@ -53,6 +53,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Sources\Serialization.cs" />
     <Compile Include="Sources\EnemyShip.cs" />
     <Compile Include="Sources\Level.cs" />
     <Compile Include="Sources\ShootEmUpGame.cs" />

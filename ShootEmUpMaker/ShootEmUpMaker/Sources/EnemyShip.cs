@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace ShootEmUpMaker
 {
-    class EnemyShip
+    public class EnemyShip
     {
-        int _point { get; set; }
-        string _shipSprite { get; set; }
-        string _weaponSprite { get; set; }
-        int _damage { get; set; }
-        int _fireRate { get; set; }
+        public string _weaponSprite { get; set; }
+        public string _shipSprite { get; set; }
+        public int _damage { get; set; }
+        public int _fireRate { get; set; }
+        public int _point { get; set; }
     }
 }

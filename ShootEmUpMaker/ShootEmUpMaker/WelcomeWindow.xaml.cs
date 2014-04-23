@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,42 @@ namespace ShootEmUpMaker
         public WelcomeWindow()
         {
             InitializeComponent();
+            
+            //Enemy Ship
+            EnemyShip enemy = new EnemyShip();
+            enemy._weaponSprite = "here";
+            enemy._shipSprite = "here";
+            enemy._damage = 1;
+            enemy._fireRate = 1;
+            enemy._point = 10;
+
+            //UserShip
+            UserShip player = new UserShip();
+            player._weaponSprite = "here";
+            player._shipSprite = "here";
+            player._damage = 1;
+            player._fireRate = 1;
+            player._life = 3;
+
+            //Level
+            Level lvl = new Level();
+            lvl._wallpaper = "Here";
+            lvl._music = "Here";
+            lvl._enemy.Add(enemy);
+            lvl._enemy.Add(enemy);
+
+            ShootEmUpGame myGame = new ShootEmUpGame();
+
+            myGame._author = "Alex";
+            myGame._descrption = "This is my game";
+            myGame._gameName = "Best game ever";
+            myGame._orientation = 0;
+            myGame._player = player;
+            myGame._level.Add(lvl);
+            myGame._level.Add(lvl);
+
+            //Serialization
+            Serialization.SerializeClass(myGame);
         }
     }
 }
