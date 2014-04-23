@@ -8,7 +8,7 @@ namespace ShootEmUpLauncher
 {
     public interface IObject
     {
-        void show();
+        void show(SFML.Graphics.RenderWindow window);
         void update();
     }
 }

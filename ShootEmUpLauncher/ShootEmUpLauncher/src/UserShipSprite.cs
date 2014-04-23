@@ -25,22 +25,23 @@ namespace ShootEmUpLauncher
         }
 
 
-        public void show()
+        public void show(SFML.Graphics.RenderWindow window)
         {
-
+            window.Draw(_shipSprite);
+            // window.Draw(_weaponSprite);
         }
 
         public void update()
         {
-            // Check que ça ne dépasse pas la fenêtre et vérifier la valeur de déplacement
+            // Check que ça ne dépasse pas la fenêtre
             if (SFML.Window.Keyboard.IsKeyPressed(SFML.Window.Keyboard.Key.Left))
-                _shipSprite.Position = new SFML.Window.Vector2f(_shipSprite.Position.X - 10, _shipSprite.Position.Y);
+                _shipSprite.Position = new SFML.Window.Vector2f(_shipSprite.Position.X - 0.1f, _shipSprite.Position.Y);
             else if (SFML.Window.Keyboard.IsKeyPressed(SFML.Window.Keyboard.Key.Right))
-                _shipSprite.Position = new SFML.Window.Vector2f(_shipSprite.Position.X + 10, _shipSprite.Position.Y);
+                _shipSprite.Position = new SFML.Window.Vector2f(_shipSprite.Position.X + 0.1f, _shipSprite.Position.Y);
             else if (SFML.Window.Keyboard.IsKeyPressed(SFML.Window.Keyboard.Key.Up))
-                _shipSprite.Position = new SFML.Window.Vector2f(_shipSprite.Position.X, _shipSprite.Position.Y + 10);
+                _shipSprite.Position = new SFML.Window.Vector2f(_shipSprite.Position.X, _shipSprite.Position.Y - 0.1f);
             else if (SFML.Window.Keyboard.IsKeyPressed(SFML.Window.Keyboard.Key.Down))
-                _shipSprite.Position = new SFML.Window.Vector2f(_shipSprite.Position.X, _shipSprite.Position.Y - 10);
+                _shipSprite.Position = new SFML.Window.Vector2f(_shipSprite.Position.X, _shipSprite.Position.Y + 0.1f);
             else if (SFML.Window.Keyboard.IsKeyPressed(SFML.Window.Keyboard.Key.Space))
             {
                 // shot ? Création d'un objet de tir et thread ?

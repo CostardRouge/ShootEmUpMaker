@@ -14,7 +14,7 @@ namespace ShootEmUpLauncher
     {
         Level   _levelData;
 
-        public void show()
+        public void show(SFML.Graphics.RenderWindow window)
         {
         }
 
