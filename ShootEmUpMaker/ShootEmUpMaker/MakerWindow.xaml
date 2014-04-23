@@ -44,9 +44,6 @@
 
     <DockPanel LastChildFill="True" Background="#FFECECEC">
         <ListBox SelectedIndex="0" DockPanel.Dock="Top" BorderBrush="#FFA41818" BorderThickness="0,0,0,1" ItemsPanel="{DynamicResource Banner}" Background="#FFCD3737" Height="35">
-            <ListBox.Effect>
-                <DropShadowEffect ShadowDepth="2" Direction="270" BlurRadius="3" Opacity="0.175"/>
-            </ListBox.Effect>
             <ListBoxItem Content="Step 1" Template="{DynamicResource BannerItem}" ToolTip="Show as list." ScrollViewer.VerticalScrollBarVisibility="Disabled" ></ListBoxItem>
             <ListBoxItem Content="Step 2" Template="{DynamicResource BannerItem}" ToolTip="Show as thumbnails." ></ListBoxItem>
             <ListBoxItem Content="Step 3" Template="{DynamicResource BannerItem}" ToolTip="Show as list and thumbnails." ></ListBoxItem>
@@ -64,6 +61,7 @@
         </Border>
         -->
 
+        <StackPanel HorizontalAlignment="Left" Width="128" Background="#FFCFCFCF" />
 
         <Grid>
             <Label x:Name="InformationsText" HorizontalAlignment="Center" VerticalAlignment="Center">
