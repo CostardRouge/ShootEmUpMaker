@@ -32,6 +32,7 @@ namespace ShootEmUpMaker
         void welcomeWindowClosed(object sender, EventArgs e)
         {
             App.Current.Shutdown(0);
+            this.makerWindow.Closed += null;
         }
 
         void makerWindowClosed(object sender, EventArgs e)

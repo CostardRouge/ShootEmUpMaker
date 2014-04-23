@@ -64,7 +64,6 @@
         </Border>
         -->
 
-        <Border DockPanel.Dock="Bottom" BorderThickness="0,1,0,0" BorderBrush="#FFC1C1C1"/>
 
         <Grid>
             <Label x:Name="InformationsText" HorizontalAlignment="Center" VerticalAlignment="Center">
