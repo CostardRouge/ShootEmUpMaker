@@ -58,7 +58,7 @@ namespace ShootEmUpMaker
             myGame._level.Add(lvl);
 
             //Serialization
-            Serialization.SerializeClass(myGame);
+            Serialization.ExportGame(myGame);
         }
     }
 }
