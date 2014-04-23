@@ -23,6 +23,14 @@ namespace ShootEmUpMaker
         public MakerWindow()
         {
             InitializeComponent();
+
+            // Init events
+            this.CreateNewLevelButton.MouseDown += CreateNewLevel;
+        }
+
+        void CreateNewLevel(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show("lol");
         }
     }
 }
