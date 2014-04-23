@@ -12,7 +12,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.IO;
 
 namespace ShootEmUpMaker
 {
@@ -21,58 +20,87 @@ namespace ShootEmUpMaker
     /// </summary>
     public partial class WelcomeWindow : Window
     {
+        public static String PROJECT_NAME = "ShootEmUpMaker";
+
+        public void LoadCreatedGames()
+        {
+            String UserDocumentPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            String CreatedGamePath = UserDocumentPath + "\\" + PROJECT_NAME;
+            String[] CreatedGamesFiles = Directory.GetFiles(@CreatedGamePath, "*.xml", SearchOption.AllDirectories);
+            int FileCount = CreatedGamesFiles.Length;
+
+            int i = 1;
+            foreach (String filePath in CreatedGamesFiles)
+            {
+                var border = new Border() { Width=140, Height=260 };
+                var text = new TextBlock() { FontSize=14 };
+
+                text.HorizontalAlignment = HorizontalAlignment.Center;
+                text.VerticalAlignment = VerticalAlignment.Center;
+                text.TextWrapping = TextWrapping.Wrap;
+                text.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+                text.FontWeight = FontWeights.Thin;
+                text.Text = System.IO.Path.GetFileNameWithoutExtension(filePath);
+
+                border.Child = text;
+                border.Name = "Game" + i.ToString();
+                border.Background = new SolidColorBrush(Color.FromRgb(255, 0, 0));
+                border.Margin = new Thickness(5, 5, 5, 5);
+
+                this.Games.Children.Insert(0, border);
+            }
+
+            // Updated created games information text
+            this.gamesCreatedTextBlock.Text = String.Format("{0} game{1} already created.", FileCount, (FileCount > 1 ? "s" : null));
+        }
+
         public WelcomeWindow()
         {
+            // Inits
             InitializeComponent();
-<<<<<<< HEAD
 
-            try
-            {
-                int i = 1;
-                string Docpath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                string finalpath = Docpath + "\\" + "ShootEmUpMaker";
-                string[] filePaths = Directory.GetFiles(@finalpath, "*.xml");
-                foreach (string x in filePaths)
-                {
-                    var border = new Border();
-                    var text = new TextBlock();
-                    text.HorizontalAlignment = HorizontalAlignment.Center;
-                    text.VerticalAlignment = VerticalAlignment.Center;
-                    text.FontSize = 36;
-                    text.Foreground = new SolidColorBrush(Color.FromRgb(255,255,255));
-                    //text.FontWeight = FontWeight;
-                    text.Text = x;
-                    //<TextBlock x:Name="CreateButton" Text="+" HorizontalAlignment="Center"
-                    //VerticalAlignment="Center" ToolTip="Click here to create a new game" FontSize="36" Foreground="White" FontWeight="Thin" />
+            // Init events
 
-                    border.Child = text;
-                    border.Name = "Game"  + i.ToString();
-                    border.Width = 140;
-                    border.Height = 260;
-                    border.Background = new SolidColorBrush(Color.FromRgb(0, 111, 111));
-                    border.Margin = new Thickness(5,5,5,5);
 
-                    this.Games.Children.Add(border);
-                    i++;
-                    MessageBox.Show(x);
-                }
-            }
+            // Default actions
+            LoadCreatedGames();
+
+            //try
+            //{
+            //    int i = 1;
+                //string[] filePaths = Directory.GetFiles(@finalpath, "*.xml");
+                //foreach (string x in filePaths)
+                //{
+                //    var border = new Border();
+                //    var text = new TextBlock();
+                //    text.HorizontalAlignment = HorizontalAlignment.Center;
+                //    text.VerticalAlignment = VerticalAlignment.Center;
+                //    text.FontSize = 36;
+                //    text.Foreground = new SolidColorBrush(Color.FromRgb(255,255,255));
+                //    //text.FontWeight = FontWeight;
+                //    text.Text = x;
+                //    //<TextBlock x:Name="CreateButton" Text="+" HorizontalAlignment="Center"
+                //    //VerticalAlignment="Center" ToolTip="Click here to create a new game" FontSize="36" Foreground="White" FontWeight="Thin" />
+
+                //    border.Child = text;
+                //    border.Name = "Game"  + i.ToString();
+                //    border.Width = 140;
+                //    border.Height = 260;
+                //    border.Background = new SolidColorBrush(Color.FromRgb(0, 111, 111));
+                //    border.Margin = new Thickness(5,5,5,5);
+
+                //    this.Games.Children.Add(border);
+                //    i++;
+                //    MessageBox.Show(x);
+            //    }
+            //}
             
-            catch (Exception e)
-            {
-                Console.WriteLine("The process failed: {0}", e.ToString());
-            }
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine("The process failed: {0}", e.ToString());
+            //}
 
-            
 
-           
-
-           // var toto = new Label();
-            //toto.Content = "toto";
-            //this.Games.Children.Add(toto);
-        }    
-=======
-            
             //Enemy Ship
             EnemyShip enemy = new EnemyShip();
             enemy._weaponSprite = "here";
@@ -109,6 +137,5 @@ namespace ShootEmUpMaker
             //Serialization
             Serialization.ExportGame(myGame);
         }
->>>>>>> ae0e5d66b1acb74a0353c82fd19da4af0c4a38a5
     }
 }
