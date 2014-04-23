@@ -57,10 +57,6 @@
     <Compile Include="Sources\Level.cs" />
     <Compile Include="Sources\ShootEmUpGame.cs" />
     <Compile Include="Sources\UserShip.cs" />
-    <Compile Include="src\ShootEmUpGame.cs" />
-    <Compile Include="src\EnemyShip.cs" />
-    <Compile Include="src\UserShip.cs" />
-    <Compile Include="src\Level.cs" />
     <Compile Include="WelcomeWindow.xaml.cs">
       <DependentUpon>WelcomeWindow.xaml</DependentUpon>
     </Compile>
