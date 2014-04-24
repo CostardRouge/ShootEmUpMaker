@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 using SFML;
 using SFML.Graphics;
@@ -30,14 +31,13 @@ namespace ShootEmUpLauncher
             window.Draw(_sprite);
         }
 
-        public List<IObject> update(SFML.Graphics.RenderWindow window, orientation orientation, List<IObject> list)
+        public void update(SFML.Graphics.RenderWindow window, orientation orientation, List<IObject> list, Stopwatch t)
         {
-            // fixer problème de lenteur (thread ?)
-            // ajout timer
             if (orientation == orientation.vertical)
-                _sprite.Position = new SFML.Window.Vector2f(_sprite.Position.X, _sprite.Position.Y + 0.05f + ( _fireRate /10));
+                _sprite.Position = new SFML.Window.Vector2f(_sprite.Position.X, _sprite.Position.Y + 0.05f + (_fireRate / 10));
             else if (orientation == orientation.horizontal)
                 _sprite.Position = new SFML.Window.Vector2f(_sprite.Position.X + 0.05f + (_fireRate / 10), _sprite.Position.Y);
+           
             for (var x = 0; x < list.Count; x++)
                 {
                     if (list[x].isEnemy())
@@ -46,10 +46,10 @@ namespace ShootEmUpLauncher
                             || (orientation == orientation.horizontal && list[x]._sprite.Position.X > _sprite.Position.X))
                         {
                             list.RemoveAt(x);
+                            list.Remove(this);
                         }
                     }
                 }
-            return list;
         }
 
         public bool isEnemy()

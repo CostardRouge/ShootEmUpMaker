@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace ShootEmUpLauncher
 {
@@ -25,14 +26,12 @@ namespace ShootEmUpLauncher
             window.Draw(_sprite);
         }
 
-        public List<IObject> update(SFML.Graphics.RenderWindow window, orientation orientation, List<IObject> list)
+        public void update(SFML.Graphics.RenderWindow window, orientation orientation, List<IObject> list, Stopwatch t)
         {
-            // ajout de timer && thread ?
             if (orientation == orientation.vertical)
                 _sprite.Position = new SFML.Window.Vector2f(_sprite.Position.X, _sprite.Position.Y + 0.03f);
             else if (orientation == orientation.horizontal)
                 _sprite.Position = new SFML.Window.Vector2f(_sprite.Position.X + 0.03f, _sprite.Position.Y);
-            return list;
         }
 
         public bool isEnemy()

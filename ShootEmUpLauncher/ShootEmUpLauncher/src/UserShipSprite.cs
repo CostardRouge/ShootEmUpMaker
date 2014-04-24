@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace ShootEmUpLauncher
 {
@@ -27,7 +28,7 @@ namespace ShootEmUpLauncher
             window.Draw(_sprite);
         }
 
-        public List<IObject> update(SFML.Graphics.RenderWindow window, orientation orientation, List<IObject> list)
+        public void update(SFML.Graphics.RenderWindow window, orientation orientation, List<IObject> list, Stopwatch t)
         {
             if (SFML.Window.Keyboard.IsKeyPressed(SFML.Window.Keyboard.Key.Left) && (_sprite.Position.X - 0.1f > 0))
                 _sprite.Position = new SFML.Window.Vector2f(_sprite.Position.X - 0.1f, _sprite.Position.Y);
@@ -37,9 +38,15 @@ namespace ShootEmUpLauncher
                 _sprite.Position = new SFML.Window.Vector2f(_sprite.Position.X, _sprite.Position.Y - 0.1f);
             else if (SFML.Window.Keyboard.IsKeyPressed(SFML.Window.Keyboard.Key.Down) && (_sprite.Position.Y + 0.1f < window.Size.Y - 32))
                 _sprite.Position = new SFML.Window.Vector2f(_sprite.Position.X, _sprite.Position.Y + 0.1f);
-            else if (SFML.Window.Keyboard.IsKeyPressed(SFML.Window.Keyboard.Key.Space))
-                list.Add(new Shot(_sprite.Position, _userShipData._weaponSprite, _userShipData._damage, _userShipData._fireRate));
-            return list;
+            if (SFML.Window.Keyboard.IsKeyPressed(SFML.Window.Keyboard.Key.Space))
+            {
+                if (t.ElapsedMilliseconds >= 200)
+                {
+                    list.Add(new Shot(_sprite.Position, _userShipData._weaponSprite, _userShipData._damage, _userShipData._fireRate));
+                    t.Restart();
+                }
+
+            }
         }
 
         public bool isEnemy()

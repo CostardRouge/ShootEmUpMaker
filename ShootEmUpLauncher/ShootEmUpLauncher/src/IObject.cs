@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 using SFML;
 using SFML.Graphics;
@@ -14,8 +15,8 @@ namespace ShootEmUpLauncher
     {
         SFML.Graphics.Sprite _sprite { get; set; } // pour le shot
 
-        void show(SFML.Graphics.RenderWindow window);
-        List<IObject> update(SFML.Graphics.RenderWindow window, orientation orientation, List<IObject> list);
+        void show(SFML.Graphics.RenderWindow w);
+        void update(SFML.Graphics.RenderWindow w, orientation o, List<IObject> l, Stopwatch t);
         bool isEnemy();
     }
 }

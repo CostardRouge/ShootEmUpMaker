@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 using SFML;
 using SFML.Graphics;
@@ -14,6 +15,7 @@ namespace ShootEmUpLauncher
 
     class Core
     {
+        private Stopwatch       _timer;
         private string          _name;
         private string          _author;
         private string          _description;
@@ -28,11 +30,14 @@ namespace ShootEmUpLauncher
 
         public Core(string path)
         {
+            _timer = new Stopwatch();
+            _timer.Start();
+
             // récupération du XML ?
             _name = "nom du jeu";
             _author = "auteur du jeu";
             _description = "blablabla";
-            _orientation = 0;
+            _orientation = orientation.vertical;
             _x = 600;
             _y = 800;
         }
@@ -42,6 +47,7 @@ namespace ShootEmUpLauncher
             Core game = new Core("toto");
             SFML.Window.VideoMode vmode = new VideoMode(game._x, game._y, 32);
             SFML.Graphics.RenderWindow window = new RenderWindow(vmode, game._name);
+            
 
             window.Closed += new EventHandler(OnClose);
             window.KeyPressed += new EventHandler<KeyEventArgs>(OnKeyPressed);
@@ -69,7 +75,7 @@ namespace ShootEmUpLauncher
                 for (var x = 0; x < game._objects.Count; x++)
                 {
                     game._objects[x].show(window);
-                    game._objects[x].update(window, game._orientation, game._objects);
+                    game._objects[x].update(window, game._orientation, game._objects, game._timer);
                 }
                 window.Display();
             }
