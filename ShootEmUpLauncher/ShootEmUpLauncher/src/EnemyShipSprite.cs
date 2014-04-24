@@ -32,6 +32,7 @@ namespace ShootEmUpLauncher
                 _sprite.Position = new SFML.Window.Vector2f(_sprite.Position.X, _sprite.Position.Y + 0.03f);
             else if (orientation == orientation.horizontal)
                 _sprite.Position = new SFML.Window.Vector2f(_sprite.Position.X + 0.03f, _sprite.Position.Y);
+            // Player get damage if touch (player always first item of the list)
         }
 
         public bool isEnemy()

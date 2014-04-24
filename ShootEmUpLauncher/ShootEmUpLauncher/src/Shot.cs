@@ -40,10 +40,18 @@ namespace ShootEmUpLauncher
            
             for (var x = 0; x < list.Count; x++)
                 {
+
+                // if collision
                     if (list[x].isEnemy())
                     {
-                        if ((orientation == orientation.vertical && list[x]._sprite.Position.Y > _sprite.Position.Y)
-                            || (orientation == orientation.horizontal && list[x]._sprite.Position.X > _sprite.Position.X))
+                        if ((orientation == orientation.vertical 
+                            && (list[x]._sprite.Position.X <= _sprite.Position.X 
+                            && _sprite.Position.X  <= list[x]._sprite.Position.X + 32) 
+                            && list[x]._sprite.Position.Y < _sprite.Position.Y)
+                            || (orientation == orientation.horizontal
+                            && (list[x]._sprite.Position.Y <= _sprite.Position.Y
+                            && _sprite.Position.Y <= list[x]._sprite.Position.Y + 32)
+                            && list[x]._sprite.Position.X < _sprite.Position.X))
                         {
                             list.RemoveAt(x);
                             list.Remove(this);

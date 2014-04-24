@@ -63,13 +63,14 @@ namespace ShootEmUpLauncher
             user._weaponSprite = "ship.png";
             UserShipSprite ship = new UserShipSprite(user);
             /**/
-            
+
             game._objects = new List<IObject>();
             game._objects.Add(enship);
             game._objects.Add(ship);
 
             while (window.IsOpen())
             {
+                // gestion level loop
                 window.DispatchEvents();
                 window.Clear();
                 for (var x = 0; x < game._objects.Count; x++)
