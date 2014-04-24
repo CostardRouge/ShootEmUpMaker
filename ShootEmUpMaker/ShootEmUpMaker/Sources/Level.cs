@@ -8,6 +8,10 @@ namespace ShootEmUpMaker
 {
     public class Level
     {
+        public int Number { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+
         public string _wallpaper { get; set; }
         public string _music { get; set; }
         public List<EnemyShip> _enemy;
