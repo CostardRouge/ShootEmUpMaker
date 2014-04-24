@@ -18,7 +18,7 @@ namespace ShootEmUpLauncher
             _enemyShipData = data;
 
             _sprite.Texture = new SFML.Graphics.Texture(data._shipSprite, new SFML.Graphics.IntRect(10, 10, 32, 32));
-            _sprite.Position = new SFML.Window.Vector2f(50, 50);
+            _sprite.Position = new SFML.Window.Vector2f(100, 0);
         }
 
         public void show(SFML.Graphics.RenderWindow window)
@@ -32,7 +32,12 @@ namespace ShootEmUpLauncher
                 _sprite.Position = new SFML.Window.Vector2f(_sprite.Position.X, _sprite.Position.Y + 0.03f);
             else if (orientation == orientation.horizontal)
                 _sprite.Position = new SFML.Window.Vector2f(_sprite.Position.X + 0.03f, _sprite.Position.Y);
-            // Player get damage if touch (player always first item of the list)
+            if (list[0]._sprite.Position.X <= _sprite.Position.X && _sprite.Position.X <= list[0]._sprite.Position.X + 32
+            && list[0]._sprite.Position.Y <= _sprite.Position.Y && _sprite.Position.Y <= list[0]._sprite.Position.Y + 32)
+                System.Console.WriteLine("Destroy Player");
+            if (_sprite.Position.X > window.Size.X || _sprite.Position.Y > window.Size.Y)
+                list.Remove(this);
+            // Losing life
         }
 
         public bool isEnemy()
