@@ -20,14 +20,17 @@ namespace ShootEmUpMaker
     /// </summary>
     public partial class MakerWindow : Window
     {
+        private ShootEmUpGame game { get; set; }
+
         public MakerWindow()
         {
+            // Inits
             InitializeComponent();
+            this.game = new ShootEmUpGame();
 
             // Init events
             this.GeneralSettingsTextBlock.MouseDown += GeneralSettingsTextBlockMouseDown;
             this.MenuAndPlayerTextBlock.MouseDown += MenuAndPlayerPanelMouseDown;
-            this.LevelTextBlock.MouseDown += LevelTextBlockMouseDown;
             this.CreateNewLevelButton.MouseDown += CreateNewLevel;
         }
 
@@ -63,7 +66,34 @@ namespace ShootEmUpMaker
 
         void CreateNewLevel(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show("lol");
+            // 
+            int LevelsCount = this.game._levels.Count;
+            ShootEmUpMaker.Level NewLevel = new ShootEmUpMaker.Level() { Number=LevelsCount + 1};
+            NewLevel.Name = String.Format("Level #{0}", NewLevel.Number);
+            this.game._levels.Add(NewLevel);
+
+            // Add a the level to the panel switcher
+            TextBlock NewLevelTextBlock = new TextBlock() { Height=160, FontSize=18};
+            NewLevelTextBlock.Text = NewLevel.Name;
+            NewLevelTextBlock.ToolTip = "LOL";
+            NewLevelTextBlock.Cursor = Cursors.Hand;
+            NewLevelTextBlock.FontWeight = FontWeights.Thin;
+            NewLevelTextBlock.TextWrapping = TextWrapping.Wrap;
+            NewLevelTextBlock.Margin = new Thickness(5, 5, 5, 5);
+            NewLevelTextBlock.Padding = new Thickness(10, 20, 10, 20);
+            NewLevelTextBlock.VerticalAlignment = VerticalAlignment.Center;
+            NewLevelTextBlock.Background = new SolidColorBrush(Color.FromRgb(65, 65, 65));
+            NewLevelTextBlock.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+            this.PanelSwitcher.Children.Insert(this.PanelSwitcher.Children.Count - 1, NewLevelTextBlock);
+            NewLevelTextBlock.MouseDown += LevelTextBlockMouseDown;
+
+
+            // Update create level button
+            this.CreateNewLevelButton.Text = "Add another level...";
+
+
+            // Scroll down the PanelSwitcherViewer
+            this.PanelSwitcherViewer.ScrollToBottom();
         }
     }
 }

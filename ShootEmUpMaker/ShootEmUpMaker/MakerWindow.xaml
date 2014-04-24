@@ -1,7 +1,7 @@
 ﻿<Window x:Class="ShootEmUpMaker.MakerWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Shoot'em up Maker" Height="350" Width="725">
+        Title="Shoot'em up Maker" Height="725" Width="800">
     <Window.Resources>
         <ItemsPanelTemplate x:Key="Banner">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right"/>
@@ -43,49 +43,39 @@
     </Window.Resources>
 
     <DockPanel LastChildFill="True" Background="#FFECECEC">
-        <ListBox SelectedIndex="0" DockPanel.Dock="Top" BorderBrush="#FFA41818" BorderThickness="0,0,0,1" ItemsPanel="{DynamicResource Banner}" Background="#FFCD3737" Height="35">
-            <ListBoxItem Content="Preview game" Template="{DynamicResource BannerItem}" ToolTip="Preview the current game..." ></ListBoxItem>
-            <ListBoxItem Content="Export game" Template="{DynamicResource BannerItem}" ToolTip="Export the current game..." ></ListBoxItem>
-        </ListBox>
-        <!--
-        <Border DockPanel.Dock="Bottom" BorderThickness="0,1,0,0" BorderBrush="#FFF1F1F1">
-            <StatusBar x:Name="BottomStatusBar" Height="32" Background="White">
-                <TextBlock HorizontalAlignment="Center">
-                <Hyperlink x:Name="ApplicationLink" NavigateUri="https://github.com/CostardRouge/Piny">Piny</Hyperlink>
-                <Run>created by</Run>
-                <Hyperlink x:Name="DeveloperLink" NavigateUri="https://github.com/CostardRouge">CostardRouge</Hyperlink>
-                <Run>.</Run>
-                </TextBlock>
-            </StatusBar>
-        </Border>
-        -->
+        <Grid DockPanel.Dock="Top" Background="#FFCD3737" Height="48">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="384"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Border BorderBrush="#FFA41818" BorderThickness="0,0,0,1">
+                <TextBlock x:Name="GameNameTexBlock" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Padding="10,0,5,0" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" FontWeight="Thin" >ggg</TextBlock>
+            </Border>
+            <ListBox SelectedIndex="0" BorderBrush="#FFA41818" BorderThickness="0,0,0,1" ItemsPanel="{DynamicResource Banner}" Height="48" Grid.ColumnSpan="2" Grid.Column="1" Background="{x:Null}">
+                <ListBoxItem Content="Preview game" Template="{DynamicResource BannerItem}" ToolTip="Preview the current game..." ></ListBoxItem>
+                <ListBoxItem Content="Export game" Template="{DynamicResource BannerItem}" ToolTip="Export the current game..." ></ListBoxItem>
+            </ListBox>
+        </Grid>
 
-           <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Padding="0,0,0,5" Background="White" Width="172">
+        <ScrollViewer x:Name="PanelSwitcherViewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible" Padding="0,0,0,5" Background="White" Width="172">
             <StackPanel x:Name="PanelSwitcher">
                 <TextBlock
                         x:Name="GeneralSettingsTextBlock"
                         Text="Game general settings" VerticalAlignment="Center" Background="#FF525252"
-                        ToolTip="Click here to create a new game" FontSize="18" 
+                        ToolTip="Click here to create a new game" FontSize="18"  Cursor="Hand"
                         Foreground="White" FontWeight="Thin" Height="160" Margin="5,5,5,0" TextWrapping="Wrap" Padding="10,20"/>
 
                 <TextBlock
                         x:Name="MenuAndPlayerTextBlock"
                         Text="Menu and player settings" VerticalAlignment="Center" Background="#FF525252"
-                        ToolTip="Click here to create a new game" FontSize="18" 
+                        ToolTip="Click here to create a new game" FontSize="18"  Cursor="Hand"
                         Foreground="White" FontWeight="Thin" Height="160" Margin="5,5,5,0" TextWrapping="Wrap" Padding="10,20"/>
-
-                <TextBlock
-                        x:Name="LevelTextBlock"
-                        Text="Level #1" VerticalAlignment="Center" Background="#FF525252"
-                        ToolTip="Click here to create a new game" FontSize="18" 
-                        Foreground="White" FontWeight="Thin" Height="160" Margin="5,5,5,0" TextWrapping="Wrap" Padding="10,20"/>
-
+              
                 <TextBlock
                         x:Name="CreateNewLevelButton"
-                        Text="Add a new level..." VerticalAlignment="Center" Background="#FF525252"
-                        ToolTip="Click here to create a new game" FontSize="18" 
+                        Text="Add the first level..." VerticalAlignment="Center" Background="#FF525252"
+                        ToolTip="Click here to create a new game" FontSize="18"  Cursor="Hand"
                         Foreground="White" FontWeight="Thin" Height="160" Margin="5,5,5,0" TextWrapping="Wrap" Padding="10,20"/>
-
 
             </StackPanel>
 
