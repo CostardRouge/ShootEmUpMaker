@@ -11,7 +11,7 @@ using SFML.Window;
 
 namespace ShootEmUpLauncher
 {
-    class Shot : IObject
+    class Shot : AObject
     {
         public SFML.Graphics.Sprite _sprite { get; set; }
         public int _damage { get; set; }

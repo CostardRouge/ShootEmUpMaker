@@ -13,68 +13,93 @@ using SFML.Window;
 
 namespace ShootEmUpLauncher
 {
-    public enum orientation {vertical, horizontal};
-
     class Core
     {
-        private Stopwatch       _timer;
-        private Stopwatch       _lastTouch;
-        private Stopwatch       _lastShot;
-        private Sprite          _background;
-        private string          _name;
-        private string          _author;
-        private string          _description;
-        private uint            _x;
-        private uint            _y;
+        #region Members
+        public Boolean Quit { set; get; }
+        public List<Section> Sections { set; get; }
+        private List<AObject> Objects { set; get; }
+        private ShootEmUpMaker.ShootEmUpGame Game { set; get; }
+        private ShootEmUp.Enumrations.eSection CurrentSection { set; get; }
 
-        public orientation _orientation { get; set; }
-        public List<IObject>   _objects { get; set; }
+        // SFML Members
+        private SFML.Window.VideoMode VideoMode { set; get; }
+        private SFML.Graphics.RenderWindow Window { set; get; }
 
-        private UserShipSprite  _player;
-        private List<Level>     _levels;
+        private Stopwatch _timer;
+        private Stopwatch _lastTouch;
+        private Stopwatch _lastShot;
+        private Sprite _background;
+        private UserShipSprite _player;
+        #endregion
 
+        #region Methodss
         public Core(string path)
         {
-            _lastTouch = new Stopwatch();
-            _lastTouch.Start();
+            // Load Game from file path
+            this.Game = ShootEmUpMaker.Serialization.ImportGame(path);
 
-            _lastShot = new Stopwatch();
-            _lastShot.Start();
+            // Inits
+            this.Quit = false;
+            this.CurrentSection = ShootEmUp.Enumrations.eSection.MAIN_MENU;
 
-            _timer = new Stopwatch();
-            _timer.Start();
-            _background = new Sprite();
-            // récupération du XML ?
-            // vérification de l'existence des fichiers
-            _name = "nom du jeu";
-            _author = "auteur du jeu";
-            _description = "blablabla";
-            _orientation = orientation.horizontal;
-            if (_orientation == orientation.vertical)
+            //Sprite text = new Sprite();
+            this.VideoMode = new VideoMode(1024, 600, 32);
+            this.Window = new RenderWindow(this.VideoMode, this.Game._name);
+
+            // Init events
+            this.Window.Closed += new EventHandler(OnClose);
+            this.Window.KeyPressed += new EventHandler<KeyEventArgs>(OnKeyPressed);
+
+            //_lastTouch = new Stopwatch();
+            //_lastTouch.Start();
+
+            //_lastShot = new Stopwatch();
+            //_lastShot.Start();
+
+            //_timer = new Stopwatch();
+            //_timer.Start();
+            //_background = new Sprite();
+        }
+
+        public void Run()
+        {
+            while (!this.Quit || this.Window.IsOpen())
             {
-                _x = 600;
-                _y = 800;
-            }
-            else
-            {
-                _x = 800;
-                _y = 600;
+                this.Update();
+                this.Display();
             }
         }
 
-        static void Main() // string[] args
+        public void Update()
         {
-            Sprite text = new Sprite();
-            Core game = new Core("toto");
-            
-            SFML.Window.VideoMode vmode = new VideoMode(game._x, game._y, 32);
-            SFML.Graphics.RenderWindow window = new RenderWindow(vmode, game._name);
+            // Update corrects sections
+            ShootEmUpLauncher.Section Section = this.Sections.Find(s => s.Section == this.CurrentSection);
 
-            window.Closed += new EventHandler(OnClose);
-            window.KeyPressed += new EventHandler<KeyEventArgs>(OnKeyPressed);
-            window.KeyPressed += new EventHandler<KeyEventArgs>(OnKeyPressed);
+            if (Section != null)
+                Section.Update();
 
-            /* Test à effacer */
+            // Core Update
+            this.Objects.Select(o => o.Update());
+        }
+
+        public void Display()
+        {
+            ShootEmUpLauncher.Section Section = this.Sections.Find(s => s.Section == this.CurrentSection);
+
+            if (Section != null)
+                Section.Display();
+
+            // Core Display
+            this.Objects.Select(o => o.Display());
+        }
+
+        static void Main(string[] args)
+        {
+            ShootEmUpLauncher.Core Core = new Core(args[0]);
+            Core.Run();
+          
+
             EnemyShip enemy = new EnemyShip();
             enemy._shipSprite = "ship.png";
 
@@ -100,20 +125,19 @@ namespace ShootEmUpLauncher
 
             game._objects = new List<IObject>();
             game._objects.Add(ship);
-            /**/
                         
-            while (window.IsOpen())
-            {
-                foreach (var item in game._levels)
-                {
-                    if (game._objects.OfType<UserShipSprite>().Count() == 0)
-                        break;
-                    game.displayLevel(game, window, item);
+            //while ()
+            //{
+            //    foreach (var item in game._levels)
+            //    {
+            //        if (game._objects.OfType<UserShipSprite>().Count() == 0)
+            //            break;
+            //        game.displayLevel(game, window, item);
                     
-                }
-                if (game._objects.OfType<UserShipSprite>().Count() > 0)
-                    game.displayText(text, "gamefinished.png", game, window);
-            }
+            //    }
+            //    if (game._objects.OfType<UserShipSprite>().Count() > 0)
+            //        game.displayText(text, "gamefinished.png", game, window);
+            //}
         }
 
         // Display functions
@@ -174,4 +198,5 @@ namespace ShootEmUpLauncher
                 window.Close();
         }
     }
+    #endregion
 }

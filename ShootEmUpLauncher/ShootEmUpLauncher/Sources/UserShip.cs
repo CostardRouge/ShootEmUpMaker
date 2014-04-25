@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShootEmUpLauncher
+namespace ShootEmUpMaker
 {
-    class UserShip
+    public class UserShip
     {
-       public int _life { get; set; }
-       public string _shipSprite { get; set; }
-       public string _weaponSprite { get; set; }
-       public int _damage { get; set; }
-       public int _fireRate { get; set; }
+        public int _life { get; set; }
+        public string _shipSprite { get; set; }
+        public string _weaponSprite { get; set; }
+        public int _damage { get; set; }
+        public int _fireRate { get; set; }
     }
 }

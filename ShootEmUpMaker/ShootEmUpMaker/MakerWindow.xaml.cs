@@ -28,6 +28,14 @@ namespace ShootEmUpMaker
             InitializeComponent();
             this.game = new ShootEmUpGame();
 
+            // test
+            this.game.Name = "totot";
+
+
+            // affect
+            this.gameNameTextBox.Text = this.game.Name;
+
+
             // Init events
             this.GeneralSettingsTextBlock.MouseDown += GeneralSettingsTextBlockMouseDown;
             this.MenuAndPlayerTextBlock.MouseDown += MenuAndPlayerPanelMouseDown;

@@ -4,14 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShootEmUpLauncher
+namespace ShootEmUpMaker
 {
-    class Level
+    public class Level
     {
+        public int _number { get; set; }
+        public string _name { get; set; }
+        public string _description { get; set; }
+
         public string _wallpaper { get; set; }
         public string _music { get; set; }
-        public UserShip _player;
         public List<EnemyShip> _enemy;
-    }
 
+        public Level()
+        {
+        this._enemy = new List<EnemyShip>();
+        }
+    }   
 }

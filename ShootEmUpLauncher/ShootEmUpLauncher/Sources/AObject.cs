@@ -8,15 +8,23 @@ using System.Diagnostics;
 using SFML;
 using SFML.Graphics;
 using SFML.Window;
+using SFML.Graphics;
 
 namespace ShootEmUpLauncher
 {
-    public interface IObject
+    public interface AObject
     {
-        SFML.Graphics.Sprite _sprite { get; set; } // pour le shot
+        #region Methods
+        protected void  Show(RenderWindow w);
+        protected void  Update(RenderWindow w, Stopwatch touch, Stopwatch shot);
+        #endregion
 
-        void show(SFML.Graphics.RenderWindow w);
-        void update(SFML.Graphics.RenderWindow w, orientation o, List<IObject> l, Stopwatch touch, Stopwatch shot);
-        bool isEnemy();
+        #region Members
+        public List<Section> Sections { set; get; }
+        public List<AObject> Objects { set; get; }
+        public SFML.Graphics.Sprite Sprite { get; set; }
+        public ShootEmUp.Enumrations.eType Types { set; get; }
+        public ShootEmUp.Enumrations.eOrientation Orientation { set; get; }
+        #endregion
     }
 }

@@ -70,18 +70,22 @@
     <Content Include="sfmlnet-window-2.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="src\Shot.cs" />
-    <Compile Include="src\EnemyShipSprite.cs" />
-    <Compile Include="src\UserShipSprite.cs" />
-    <Compile Include="src\Core.cs" />
-    <Compile Include="src\EnemyShip.cs">
+    <Compile Include="Sources\Enumerations.cs" />
+    <Compile Include="Sources\Section.cs" />
+    <Compile Include="Sources\Serialization.cs" />
+    <Compile Include="Sources\ShootEmUpGame.cs" />
+    <Compile Include="Sources\Shot.cs" />
+    <Compile Include="Sources\EnemyShipSprite.cs" />
+    <Compile Include="Sources\UserShipSprite.cs" />
+    <Compile Include="Sources\Core.cs" />
+    <Compile Include="Sources\EnemyShip.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="src\IObject.cs" />
-    <Compile Include="src\Level.cs">
+    <Compile Include="Sources\AObject.cs" />
+    <Compile Include="Sources\Level.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="src\UserShip.cs">
+    <Compile Include="Sources\UserShip.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
   </ItemGroup>
