@@ -22,18 +22,13 @@ namespace ShootEmUpMaker
     {
         public static String PROJECT_NAME = "ShootEmUpMaker";
 
-        public void LoadCreatedGames()
+        public void AddCreatedGames(String[] CreatedGamesFiles)
         {
-            String UserDocumentPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            String CreatedGamePath = UserDocumentPath + "\\" + PROJECT_NAME;
-            String[] CreatedGamesFiles = Directory.GetFiles(@CreatedGamePath, "*.xml", SearchOption.AllDirectories);
-            int FileCount = CreatedGamesFiles.Length;
-
             int i = 1;
             foreach (String filePath in CreatedGamesFiles)
             {
-                var border = new Border() { Width=140, Height=260 };
-                var text = new TextBlock() { FontSize=14 };
+                var border = new Border() { Width = 140, Height = 260 };
+                var text = new TextBlock() { FontSize = 14 };
 
                 text.HorizontalAlignment = HorizontalAlignment.Center;
                 text.VerticalAlignment = VerticalAlignment.Center;
@@ -41,7 +36,7 @@ namespace ShootEmUpMaker
                 text.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
                 text.FontWeight = FontWeights.Thin;
                 text.Text = System.IO.Path.GetFileNameWithoutExtension(filePath);
-                
+
                 border.Child = text;
                 border.Name = "Game" + i.ToString();
                 border.Cursor = Cursors.Hand;
@@ -51,15 +46,31 @@ namespace ShootEmUpMaker
 
                 this.Games.Children.Insert(0, border);
             }
+        }
 
-            // Updated created games information text
-            this.gamesCreatedTextBlock.Text = String.Format("{0} game{1} already created.", FileCount, FileCount > 1 ? "s" : null);
+        public void LoadCreatedGames()
+        {
+            String UserDocumentPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            String CreatedGamePath = UserDocumentPath + "\\" + PROJECT_NAME;
+            try
+            {
+                // List and load created games
+                String[] CreatedGamesFiles = Directory.GetFiles(@CreatedGamePath, "*.xml", SearchOption.AllDirectories);
+                this.AddCreatedGames(CreatedGamesFiles);
+
+                // Updated created games information text
+                int FileCount = CreatedGamesFiles.Length;
+                this.gamesCreatedTextBlock.Text = String.Format("{0} game{1} already created.", FileCount, FileCount > 1 ? "s" : null);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("The process failed: {0}", e.ToString());
+            }
         }
 
         void OpenCreatedGame(object sender, MouseButtonEventArgs e)
         {
             MessageBox.Show(Application.Current.Windows.Count.ToString());
-            ;
         }
 
         public WelcomeWindow()
