@@ -20,7 +20,8 @@ namespace ShootEmUpMaker
     /// </summary>
     public partial class WelcomeWindow : Window
     {
-        public static String PROJECT_NAME = "ShootEmUpMaker";
+        private static String PROJECT_NAME = "ShootEmUpMaker";
+        private List<Tuple<String, String>> CreatedGamesFound = new List<Tuple<String, String>> ();
 
         public void AddCreatedGames(String[] CreatedGamesFiles)
         {
@@ -45,6 +46,7 @@ namespace ShootEmUpMaker
                 border.MouseDown += OpenCreatedGame;
 
                 this.Games.Children.Insert(0, border);
+                this.CreatedGamesFound.Add(new Tuple<String, String>(text.Text, filePath));
             }
         }
 
@@ -70,6 +72,7 @@ namespace ShootEmUpMaker
 
         void OpenCreatedGame(object sender, MouseButtonEventArgs e)
         {
+<<<<<<< HEAD
             //MessageBox.Show(Application.Current.Windows.Count.ToString());
 
             String UserDocumentPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -78,10 +81,23 @@ namespace ShootEmUpMaker
             // List and load created games
             String[] CreatedGamesFiles = Directory.GetFiles(@CreatedGamePath, "*.xml", SearchOption.AllDirectories);
             MessageBox.Show(CreatedGamesFiles[0]);
+=======
+            // Get created games path
+            Border b = (Border)sender;
+            TextBlock t = (TextBlock)b.Child;
+            String gamePath = CreatedGamesFound.Find(x => x.Item1.Equals(t.Text)).Item2;
+
+            MessageBox.Show(gamePath);
+            // WAY 1 : var win =  Application.Current.Properties["makerWindow"];
+>>>>>>> 13f67dba35d6a900458232dbae694e1eec29eee4
 
             App MyApplication = ((App)Application.Current);
             MyApplication.makerWindow = new MakerWindow();
+<<<<<<< HEAD
             MyApplication.makerWindow.game = Serialization.ImportGame(CreatedGamesFiles[0]);
+=======
+            MyApplication.makerWindow.game = Serialization.ImportGame(gamePath);
+>>>>>>> 13f67dba35d6a900458232dbae694e1eec29eee4
             MyApplication.makerWindow.Closed += MyApplication.makerWindowClosed;
             MyApplication.makerWindow.Show();
 
@@ -101,40 +117,40 @@ namespace ShootEmUpMaker
             // Default actions
             LoadCreatedGames();
 
-            //Enemy Ship
-            EnemyShip enemy = new EnemyShip();
-            enemy._weaponSprite = "here";
-            enemy._shipSprite = "here";
-            enemy._damage = 1;
-            enemy._fireRate = 1;
-            enemy._point = 10;
+            ////Enemy Ship
+            //EnemyShip enemy = new EnemyShip();
+            //enemy._weaponSprite = "here";
+            //enemy._shipSprite = "here";
+            //enemy._damage = 1;
+            //enemy._fireRate = 1;
+            //enemy._point = 10;
 
-            //UserShip
-            UserShip player = new UserShip();
-            player._weaponSprite = "here";
-            player._shipSprite = "here";
-            player._damage = 1;
-            player._fireRate = 1;
-            player._life = 3;
+            ////UserShip
+            //UserShip player = new UserShip();
+            //player._weaponSprite = "here";
+            //player._shipSprite = "here";
+            //player._damage = 1;
+            //player._fireRate = 1;
+            //player._life = 3;
 
-            //Level
-            Level lvl = new Level();
-            lvl._wallpaper = "Here";
-            lvl._music = "Here";
-            lvl._enemy.Add(enemy);
-            lvl._enemy.Add(enemy);
+            ////Level
+            //Level lvl = new Level();
+            //lvl._wallpaper = "Here";
+            //lvl._music = "Here";
+            //lvl._enemy.Add(enemy);
+            //lvl._enemy.Add(enemy);
 
-            ShootEmUpGame myGame = new ShootEmUpGame();
-            myGame._name = "Best game ever";
-            myGame._description = "This is my game";
-            myGame._author = "Alex";
-            myGame._orientation = 0;
-            myGame._player = player;
-            myGame._levels.Add(lvl);
-            myGame._levels.Add(lvl);
+            //ShootEmUpGame myGame = new ShootEmUpGame();
+            //myGame._name = "Best game ever";
+            //myGame._description = "This is my game";
+            //myGame._author = "Alex";
+            //myGame._orientation = 0;
+            //myGame._player = player;
+            //myGame._levels.Add(lvl);
+            //myGame._levels.Add(lvl);
 
-            //Serialization
-            Serialization.ExportGame(myGame);
+            ////Serialization
+            //Serialization.ExportGame(myGame);
         }
     }
 }
