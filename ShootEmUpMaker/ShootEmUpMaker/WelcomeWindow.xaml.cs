@@ -111,40 +111,40 @@ namespace ShootEmUpMaker
             // Default actions
             LoadCreatedGames();
 
-            ////Enemy Ship
-            //EnemyShip enemy = new EnemyShip();
-            //enemy._weaponSprite = "here";
-            //enemy._shipSprite = "here";
-            //enemy._damage = 1;
-            //enemy._fireRate = 1;
-            //enemy._point = 10;
+            //Enemy Ship
+            EnemyShip enemy = new EnemyShip();
+            enemy._weaponSprite = "here";
+            enemy._shipSprite = "here";
+            enemy._damage = 1;
+            enemy._fireRate = 1;
+            enemy._point = 10;
 
-            ////UserShip
-            //UserShip player = new UserShip();
-            //player._weaponSprite = "here";
-            //player._shipSprite = "here";
-            //player._damage = 1;
-            //player._fireRate = 1;
-            //player._life = 3;
+            //UserShip
+            UserShip player = new UserShip();
+            player._weaponSprite = "here";
+            player._shipSprite = "here";
+            player._damage = 1;
+            player._fireRate = 1;
+            player._life = 3;
 
-            ////Level
-            //Level lvl = new Level();
-            //lvl._wallpaper = "Here";
-            //lvl._music = "Here";
-            //lvl._enemy.Add(enemy);
-            //lvl._enemy.Add(enemy);
+            //Level
+            Level lvl = new Level();
+            lvl._wallpaper = "Here";
+            lvl._music = "Here";
+            lvl._enemy.Add(enemy);
+            lvl._enemy.Add(enemy);
 
-            //ShootEmUpGame myGame = new ShootEmUpGame();
-            //myGame._name = "Best game ever";
-            //myGame._description = "This is my game";
-            //myGame._author = "Alex";
-            //myGame._orientation = 0;
-            //myGame._player = player;
-            //myGame._levels.Add(lvl);
-            //myGame._levels.Add(lvl);
+            ShootEmUpGame myGame = new ShootEmUpGame();
+            myGame._name = "Best game ever";
+            myGame._description = "This is my game";
+            myGame._author = "Alex";
+            myGame._orientation = 0;
+            myGame._player = player;
+            myGame._levels.Add(lvl);
+            myGame._levels.Add(lvl);
 
-            ////Serialization
-            //Serialization.ExportGame(myGame);
+            //Serialization
+            Serialization.ExportGame(myGame);
         }
     }
 }
