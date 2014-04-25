@@ -40,6 +40,28 @@ namespace ShootEmUpMaker
             this.GeneralSettingsTextBlock.MouseDown += GeneralSettingsTextBlockMouseDown;
             this.MenuAndPlayerTextBlock.MouseDown += MenuAndPlayerPanelMouseDown;
             this.CreateNewLevelButton.MouseDown += CreateNewLevel;
+
+            SetGameObjectToView();    
+
+        }
+
+        void SetGameObjectToView()
+        {
+            this.game.Name = "NAVION";
+            this.game._description = "jeu DE NAVION NERVEU";
+            this.game._author = "SPLEFAN LE AUTOR";
+
+            this.gameNameTextBox.Text = this.game.Name;
+            this.gameDescriptionTextbox.Text = this.game._description;
+            this.gameAuthorTextbox.Text = this.game._author;
+
+            this.game._player._shipSprite = "THE ENTREPRISE";
+            this.game._player._weaponSprite = "DOUBLE CANON";
+            this.game._player._life = 5;
+
+            this.playerSpriteTextBox.Text = this.game._player._shipSprite;
+            this.weaponSpriteTextbox.Text = this.game._player._weaponSprite;
+            this.playerLifeTextbox.Text = this.game._player._life.ToString();
         }
 
         void LevelTextBlockMouseDown(object sender, MouseButtonEventArgs e)

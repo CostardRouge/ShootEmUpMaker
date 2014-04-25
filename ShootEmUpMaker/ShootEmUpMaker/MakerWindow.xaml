@@ -91,6 +91,10 @@
                 <Label HorizontalAlignment="Center" VerticalAlignment="Center">
                     Game name :
                 </Label>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9e967112880e356e74c3157615a5bb0809b18ed8
                 <TextBox x:Name="gameNameTextBox" />
 
                 <Label HorizontalAlignment="Center" VerticalAlignment="Center">

@@ -25,6 +25,7 @@ namespace ShootEmUpMaker
         public ShootEmUpGame()
         {
             this._levels = new List<Level>();
+            this._player = new UserShip();
         }
 
         public string _name { get; set; }
