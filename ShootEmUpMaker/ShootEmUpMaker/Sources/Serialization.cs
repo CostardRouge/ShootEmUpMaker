@@ -30,13 +30,44 @@ namespace ShootEmUpMaker
 
         public static ShootEmUpGame ImportGame(string path)
         {
-            ShootEmUpGame myGame;
+            ShootEmUpGame myGame = new ShootEmUpGame();
             XmlSerializer xs = new XmlSerializer(typeof(ShootEmUpGame));
-            using (TextReader tr = new StringReader(path))
+            using (StreamReader tr = new StreamReader(path))
             {
-                myGame = (ShootEmUpGame)xs.Deserialize(tr);
+                try
+                {
+                    myGame = (ShootEmUpGame)xs.Deserialize(tr);
+                }
+                catch (Exception e)
+                {
+                    System.Windows.MessageBox.Show(e.ToString());  
+                }
             }
             return myGame;
         }
+
+        //public static List<Media> readMediaList(string path)
+        //{
+        //    List<Media> ret;
+        //    XmlSerializer reader = new XmlSerializer(typeof(List<Media>));
+
+        //    ret = new List<Media>();
+        //    using (StreamReader file = new StreamReader(path))
+        //    {
+        //        ret = (List<Media>)reader.Deserialize(file);
+        //    }
+        //    return (ret);
+        //}
+
+        //public static void writeMediaList(string path, object medias)
+        //{
+        //    XmlSerializer writer = new XmlSerializer(medias.GetType());
+
+        //    using (StreamWriter file = new StreamWriter(path))
+        //    {
+        //        writer.Serialize(file, medias);
+        //    }
+        //}
+        //#endregion Serialization
     }
 }

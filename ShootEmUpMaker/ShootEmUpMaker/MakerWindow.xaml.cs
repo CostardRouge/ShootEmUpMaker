@@ -20,7 +20,7 @@ namespace ShootEmUpMaker
     /// </summary>
     public partial class MakerWindow : Window
     {
-        private ShootEmUpGame game { get; set; }
+        public ShootEmUpGame game { get; set; }
 
         public MakerWindow()
         {
