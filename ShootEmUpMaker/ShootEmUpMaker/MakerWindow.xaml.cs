@@ -20,7 +20,7 @@ namespace ShootEmUpMaker
     /// </summary>
     public partial class MakerWindow : Window
     {
-        private ShootEmUpGame game { get; set; }
+        public ShootEmUpGame game { get; set; }
 
         public MakerWindow()
         {
@@ -93,15 +93,11 @@ namespace ShootEmUpMaker
             this.PanelSwitcher.Children.Insert(this.PanelSwitcher.Children.Count - 1, NewLevelTextBlock);
             NewLevelTextBlock.MouseDown += LevelTextBlockMouseDown;
 
-
             // Update create level button
             this.CreateNewLevelButton.Text = "Add another level...";
 
-
             // Scroll down the PanelSwitcherViewer
             this.PanelSwitcherViewer.ScrollToBottom();
-
-
             MessageBox.Show(this.game.Name);
         }
     }

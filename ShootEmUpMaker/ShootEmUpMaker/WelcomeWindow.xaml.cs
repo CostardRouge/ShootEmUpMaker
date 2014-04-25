@@ -70,7 +70,16 @@ namespace ShootEmUpMaker
 
         void OpenCreatedGame(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show(Application.Current.Windows.Count.ToString());
+            // WAY 1 : var win =  Application.Current.Properties["makerWindow"];
+
+            // WAY 2 : Hum, I prefer this one
+            App MyApplication = ((App)Application.Current);
+            MyApplication.makerWindow = new MakerWindow();
+            MyApplication.makerWindow.game = null;
+            MyApplication.makerWindow.Closed += MyApplication.makerWindowClosed;
+            MyApplication.makerWindow.Show();
+
+            this.Hide();
         }
 
         public WelcomeWindow()
