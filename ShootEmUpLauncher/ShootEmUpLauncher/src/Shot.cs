@@ -31,7 +31,7 @@ namespace ShootEmUpLauncher
             window.Draw(_sprite);
         }
 
-        public void update(SFML.Graphics.RenderWindow window, orientation orientation, List<IObject> list, Stopwatch t)
+        public void update(SFML.Graphics.RenderWindow window, orientation orientation, List<IObject> list, Stopwatch touch, Stopwatch shot)
         {
             if (orientation == orientation.vertical)
                 _sprite.Position = new SFML.Window.Vector2f(_sprite.Position.X, _sprite.Position.Y + 0.05f + (_fireRate / 10));
