@@ -24,5 +24,7 @@ namespace ShootEmUpMaker
         {
             this._levels = new List<Level>();
         }
+
+        public string _name { get; set; }
     }
 }

@@ -110,7 +110,7 @@ namespace ShootEmUpMaker
             lvl._enemy.Add(enemy);
 
             ShootEmUpGame myGame = new ShootEmUpGame();
-            myGame.Name = "Best game ever";
+            myGame._name = "Best game ever";
             myGame._description = "This is my game";
             myGame._author = "Alex";
             myGame._orientation = 0;

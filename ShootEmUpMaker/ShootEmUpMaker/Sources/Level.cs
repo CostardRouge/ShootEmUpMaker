@@ -8,9 +8,9 @@ namespace ShootEmUpMaker
 {
     public class Level
     {
-        public int Number { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public int _number { get; set; }
+        public string _name { get; set; }
+        public string _description { get; set; }
 
         public string _wallpaper { get; set; }
         public string _music { get; set; }

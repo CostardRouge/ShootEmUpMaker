@@ -74,13 +74,13 @@ namespace ShootEmUpMaker
         {
             // 
             int LevelsCount = this.game._levels.Count;
-            ShootEmUpMaker.Level NewLevel = new ShootEmUpMaker.Level() { Number=LevelsCount + 1};
-            NewLevel.Name = String.Format("Level #{0}", NewLevel.Number);
+            ShootEmUpMaker.Level NewLevel = new ShootEmUpMaker.Level() { _number=LevelsCount + 1};
+            NewLevel._name = String.Format("Level #{0}", NewLevel._number);
             this.game._levels.Add(NewLevel);
 
             // Add a the level to the panel switcher
             TextBlock NewLevelTextBlock = new TextBlock() { Height=160, FontSize=18};
-            NewLevelTextBlock.Text = NewLevel.Name;
+            NewLevelTextBlock.Text = NewLevel._name;
             NewLevelTextBlock.ToolTip = "LOL";
             NewLevelTextBlock.Cursor = Cursors.Hand;
             NewLevelTextBlock.FontWeight = FontWeights.Thin;

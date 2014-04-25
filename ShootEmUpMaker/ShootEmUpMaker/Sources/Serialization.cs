@@ -14,15 +14,15 @@ namespace ShootEmUpMaker
         {
             //Create game folder
             string docPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            Directory.CreateDirectory(docPath + "\\ShootEmUpMaker\\" + myGame.Name);
+            Directory.CreateDirectory(docPath + "\\ShootEmUpMaker\\" + myGame._name);
 
             //Create xml file in game folder    
             XmlSerializer xs = new XmlSerializer(typeof(ShootEmUpGame));
             using (StreamWriter wr = new StreamWriter(docPath +
                 "\\ShootEmUpMaker\\" + 
-                myGame.Name + 
+                myGame._name + 
                 "\\" +
-                myGame.Name + ".xml"))
+                myGame._name + ".xml"))
             {
                 xs.Serialize(wr, myGame);
             }
