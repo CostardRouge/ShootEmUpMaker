@@ -26,18 +26,16 @@ namespace ShootEmUpLauncher
             window.Draw(_sprite);
         }
 
-        public void update(SFML.Graphics.RenderWindow window, orientation orientation, List<IObject> list, Stopwatch t)
+        public void update(SFML.Graphics.RenderWindow window, orientation orientation, List<IObject> list, Stopwatch touch, Stopwatch shot)
         {
             if (orientation == orientation.vertical)
                 _sprite.Position = new SFML.Window.Vector2f(_sprite.Position.X, _sprite.Position.Y + 0.03f);
             else if (orientation == orientation.horizontal)
                 _sprite.Position = new SFML.Window.Vector2f(_sprite.Position.X + 0.03f, _sprite.Position.Y);
-            if (list[0]._sprite.Position.X <= _sprite.Position.X && _sprite.Position.X <= list[0]._sprite.Position.X + 32
-            && list[0]._sprite.Position.Y <= _sprite.Position.Y && _sprite.Position.Y <= list[0]._sprite.Position.Y + 32)
-                System.Console.WriteLine("Destroy Player");
+            
             if (_sprite.Position.X > window.Size.X || _sprite.Position.Y > window.Size.Y)
                 list.Remove(this);
-            // Losing life
+ 
         }
 
         public bool isEnemy()

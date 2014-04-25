@@ -49,7 +49,7 @@ namespace ShootEmUpLauncher
             _name = "nom du jeu";
             _author = "auteur du jeu";
             _description = "blablabla";
-            _orientation = orientation.vertical;
+            _orientation = orientation.horizontal;
             if (_orientation == orientation.vertical)
             {
                 _x = 600;

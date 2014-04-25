@@ -28,7 +28,7 @@ namespace ShootEmUpLauncher
             window.Draw(_sprite);
         }
 
-        public void update(SFML.Graphics.RenderWindow window, orientation orientation, List<IObject> list, Stopwatch t)
+        public void update(SFML.Graphics.RenderWindow window, orientation orientation, List<IObject> list, Stopwatch touch, Stopwatch shot)
         {
             if (SFML.Window.Keyboard.IsKeyPressed(SFML.Window.Keyboard.Key.Left) && (_sprite.Position.X - 0.1f > 0))
                 _sprite.Position = new SFML.Window.Vector2f(_sprite.Position.X - 0.1f, _sprite.Position.Y);
@@ -40,12 +40,31 @@ namespace ShootEmUpLauncher
                 _sprite.Position = new SFML.Window.Vector2f(_sprite.Position.X, _sprite.Position.Y + 0.1f);
             if (SFML.Window.Keyboard.IsKeyPressed(SFML.Window.Keyboard.Key.Space))
             {
-                if (t.ElapsedMilliseconds >= 200)
+                if (touch.ElapsedMilliseconds >= 200)
                 {
                     list.Add(new Shot(_sprite.Position, _userShipData._weaponSprite, _userShipData._damage, _userShipData._fireRate));
-                    t.Restart();
+                    touch.Restart();
                 }
+            }
 
+            for (var x = 0; x < list.Count; x++)
+            {
+                if (list[x].isEnemy())
+                {
+                    if (list[x]._sprite.Position.X <= _sprite.Position.X
+                    && _sprite.Position.X <= list[x]._sprite.Position.X + 32
+                    && list[x]._sprite.Position.Y <= _sprite.Position.Y
+                    && _sprite.Position.Y <= list[x]._sprite.Position.Y + 32)
+                    {
+                        if (shot.ElapsedMilliseconds >= 200)
+                        {
+                            _life--;
+                            if (_life <= 0)
+                                list.Remove(this);
+                            shot.Restart();
+                        }
+                    }  
+                }
             }
         }
 

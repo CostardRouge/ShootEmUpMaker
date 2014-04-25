@@ -12,6 +12,7 @@ namespace ShootEmUpMaker
         public string Name { get; set; }
         public string _author { get; set; }
         public string _description { get; set; }
+        public string _wallpaper { get; set; }
         public enum E_orientation
         {
             Horizontal = 0,

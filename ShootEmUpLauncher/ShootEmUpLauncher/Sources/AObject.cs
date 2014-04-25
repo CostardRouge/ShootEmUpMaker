@@ -16,7 +16,7 @@ namespace ShootEmUpLauncher
         SFML.Graphics.Sprite _sprite { get; set; } // pour le shot
 
         void show(SFML.Graphics.RenderWindow w);
-        void update(SFML.Graphics.RenderWindow w, orientation o, List<IObject> l, Stopwatch t);
+        void update(SFML.Graphics.RenderWindow w, orientation o, List<IObject> l, Stopwatch touch, Stopwatch shot);
         bool isEnemy();
     }
 }
