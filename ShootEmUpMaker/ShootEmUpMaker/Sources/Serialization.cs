@@ -45,29 +45,5 @@ namespace ShootEmUpMaker
             }
             return myGame;
         }
-
-        //public static List<Media> readMediaList(string path)
-        //{
-        //    List<Media> ret;
-        //    XmlSerializer reader = new XmlSerializer(typeof(List<Media>));
-
-        //    ret = new List<Media>();
-        //    using (StreamReader file = new StreamReader(path))
-        //    {
-        //        ret = (List<Media>)reader.Deserialize(file);
-        //    }
-        //    return (ret);
-        //}
-
-        //public static void writeMediaList(string path, object medias)
-        //{
-        //    XmlSerializer writer = new XmlSerializer(medias.GetType());
-
-        //    using (StreamWriter file = new StreamWriter(path))
-        //    {
-        //        writer.Serialize(file, medias);
-        //    }
-        //}
-        //#endregion Serialization
     }
 }
