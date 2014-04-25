@@ -70,6 +70,7 @@ namespace ShootEmUpMaker
 
         void OpenCreatedGame(object sender, MouseButtonEventArgs e)
         {
+<<<<<<< HEAD
             MessageBox.Show(Application.Current.Windows.Count.ToString());
 
             ShootEmUpGame myGame = new ShootEmUpGame();
@@ -79,6 +80,18 @@ namespace ShootEmUpMaker
             // List and load created games
             String[] CreatedGamesFiles = Directory.GetFiles(@CreatedGamePath, "*.xml", SearchOption.AllDirectories);
             myGame = Serialization.ImportGame(CreatedGamesFiles[0]);
+=======
+            // WAY 1 : var win =  Application.Current.Properties["makerWindow"];
+
+            // WAY 2 : Hum, I prefer this one
+            App MyApplication = ((App)Application.Current);
+            MyApplication.makerWindow = new MakerWindow();
+            MyApplication.makerWindow.game = null;
+            MyApplication.makerWindow.Closed += MyApplication.makerWindowClosed;
+            MyApplication.makerWindow.Show();
+
+            this.Hide();
+>>>>>>> 23fb7888c20bd6cae8af9a7d0a1b479791a20131
         }
 
         public WelcomeWindow()
