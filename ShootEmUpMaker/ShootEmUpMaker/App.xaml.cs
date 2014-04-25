@@ -28,20 +28,19 @@ namespace ShootEmUpMaker
             this.welcomeWindow.Closed += welcomeWindowClosed;
         }
 
-
         void welcomeWindowClosed(object sender, EventArgs e)
         {
             App.Current.Shutdown(0);
         }
 
-        void makerWindowClosed(object sender, EventArgs e)
+        public void makerWindowClosed(object sender, EventArgs e)
         {
             this.makerWindow = null;
             this.welcomeWindow.Show();
             //this.makerWindow.Hide();
         }
 
-        void CreateNewGame(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        public void CreateNewGame(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             this.welcomeWindow.Hide();
             if (this.makerWindow == null)
@@ -54,7 +53,7 @@ namespace ShootEmUpMaker
         #endregion
 
         #region Attributes
-        private ShootEmUpMaker.WelcomeWindow    welcomeWindow;
+        private ShootEmUpMaker.WelcomeWindow   welcomeWindow;
         public ShootEmUpMaker.MakerWindow      makerWindow;
         #endregion
     }
