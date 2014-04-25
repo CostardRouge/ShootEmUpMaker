@@ -30,7 +30,7 @@ namespace ShootEmUpMaker
 
         public static ShootEmUpGame ImportGame(string path)
         {
-            ShootEmUpGame myGame = new ShootEmUpGame();
+            ShootEmUpGame myGame;
             XmlSerializer xs = new XmlSerializer(typeof(ShootEmUpGame));
             using (TextReader tr = new StringReader(path))
             {
