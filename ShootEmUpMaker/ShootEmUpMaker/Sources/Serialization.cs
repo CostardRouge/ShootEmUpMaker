@@ -13,19 +13,58 @@ namespace ShootEmUpMaker
         public static void ExportGame(ShootEmUpGame myGame)
         {
             //Create game folder
-            string docPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            Directory.CreateDirectory(docPath + "\\ShootEmUpMaker\\" + myGame._name);
+            string GamePath = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\ShootEmUpMaker\\";
+            Directory.CreateDirectory(GamePath + myGame._name);
 
             //Create xml file in game folder    
             XmlSerializer xs = new XmlSerializer(typeof(ShootEmUpGame));
-            using (StreamWriter wr = new StreamWriter(docPath +
-                "\\ShootEmUpMaker\\" + 
+            using (StreamWriter wr = new StreamWriter(GamePath + 
                 myGame._name + 
                 "\\" +
                 myGame._name + ".xml"))
             {
                 xs.Serialize(wr, myGame);
             }
+
+            //Copy ressources to game folder
+            copyRessources(myGame);
+        }
+
+        public static void copyRessources(ShootEmUpGame myGame)
+        {
+            String UserDocumentPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\ShootEmUpMaker\\";
+            String CreatedGamePath = UserDocumentPath + myGame._name + "\\res";
+
+            //Creating ressource folder
+            Directory.CreateDirectory(CreatedGamePath);
+            Directory.CreateDirectory(CreatedGamePath + "\\general");
+            Directory.CreateDirectory(CreatedGamePath + "\\player");
+            Directory.CreateDirectory(CreatedGamePath + "\\enemy");
+
+        //    //Copying ressources to folder
+        //    foreach (Level x in myGame._levels)
+        //    {
+        //        //General
+        //        string wallName = Path.GetFileName(x._wallpaper);
+        //        string musicName = Path.GetFileName(x._music);
+        //        File.Copy(x._wallpaper, CreatedGamePath + "\\" + wallName);
+        //        File.Copy(x._music, CreatedGamePath + "\\" + musicName);
+
+        //        //Enemy
+        //        foreach (EnemyShip z in x._enemy)
+        //        {
+        //            string EshipSprite = Path.GetFileName(z._shipSprite);
+        //            string EweaponSprite = Path.GetFileName(z._weaponSprite);
+        //            File.Copy(x._wallpaper, CreatedGamePath + "\\" + EshipSprite);
+        //            File.Copy(x._music, CreatedGamePath + "\\" + EweaponSprite);
+        //        }
+        //    }
+
+        //    //Player
+        //    string UshipSprite = Path.GetFileName(myGame._player._shipSprite);
+        //    string UweaponSprite = Path.GetFileName(myGame._player._weaponSprite);
+        //    File.Copy(myGame._player._shipSprite, CreatedGamePath + "\\" + UshipSprite);
+        //    File.Copy(myGame._player._weaponSprite, CreatedGamePath + "\\" + UweaponSprite);
         }
 
         public static ShootEmUpGame ImportGame(string path)
