@@ -27,12 +27,8 @@ namespace ShootEmUpMaker
         public ImageBrush getGameBackground(string gamePath)
         {
             ShootEmUpGame game = Serialization.ImportGame(gamePath);
-
-            //ImageBrush ret = new ImageBrush(new BitmapImage(new Uri(@"pack://application:" + gamePath)));
-            //ImageBrush ret = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), game._wallpaper)));
             ImageBrush ret = new ImageBrush(new BitmapImage(new Uri(game._wallpaper, UriKind.Relative)));
 
-            //System.Console.WriteLine(BaseUriHelper.GetBaseUri(this).ToString());
             return ret;
         }
 

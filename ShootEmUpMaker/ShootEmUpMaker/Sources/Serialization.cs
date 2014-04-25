@@ -48,8 +48,8 @@ namespace ShootEmUpMaker
                 //General
                 string wallName = Path.GetFileName(x._wallpaper);
                 string musicName = Path.GetFileName(x._music);
-            //    File.Copy(x._wallpaper, CreatedGamePath + "\\" + wallName);
-            //    File.Copy(x._music, CreatedGamePath + "\\" + musicName);
+                //File.Copy(x._wallpaper, CreatedGamePath + "\\general\\" + wallName);
+                //    File.Copy(x._music, CreatedGamePath + "\\general\\" + musicName);
                 x._wallpaper = wallName;
                 x._music = musicName;
 
@@ -58,8 +58,8 @@ namespace ShootEmUpMaker
                 {
                     string EshipSprite = Path.GetFileName(z._shipSprite);
                     string EweaponSprite = Path.GetFileName(z._weaponSprite);
-            //        File.Copy(x._wallpaper, CreatedGamePath + "\\" + EshipSprite);
-            //        File.Copy(x._music, CreatedGamePath + "\\" + EweaponSprite);
+                 //   File.Copy(z._shipSprite, CreatedGamePath + "\\enemy\\" + EshipSprite);
+                 //   File.Copy(z._weaponSprite, CreatedGamePath + "\\enemy\\" + EweaponSprite);
                     z._shipSprite = EshipSprite;
                     z._weaponSprite = EweaponSprite;
                 }
@@ -68,10 +68,14 @@ namespace ShootEmUpMaker
             ////Player
             string UshipSprite = Path.GetFileName(myGame._player._shipSprite);
             string UweaponSprite = Path.GetFileName(myGame._player._weaponSprite);
-            //File.Copy(myGame._player._shipSprite, CreatedGamePath + "\\" + UshipSprite);
-            //File.Copy(myGame._player._weaponSprite, CreatedGamePath + "\\" + UweaponSprite);
+            //File.Copy(myGame._player._shipSprite, CreatedGamePath + "\\player\\" + UshipSprite);
+            //File.Copy(myGame._player._weaponSprite, CreatedGamePath + "\\player\\" + UweaponSprite);
             myGame._player._shipSprite = UshipSprite;
             myGame._player._weaponSprite = UweaponSprite;
+
+            string thumbName = Path.GetFileName(myGame._wallpaper);
+            File.Copy(myGame._wallpaper, CreatedGamePath + "\\general\\" + thumbName);
+            myGame._wallpaper = thumbName;
         }
 
         public static ShootEmUpGame ImportGame(string path)
