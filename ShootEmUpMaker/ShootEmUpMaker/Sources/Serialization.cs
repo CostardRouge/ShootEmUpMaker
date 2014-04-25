@@ -43,35 +43,35 @@ namespace ShootEmUpMaker
 
 
             ////Copying ressources to folder
-            //foreach (Level x in myGame._levels)
-            //{
-            //    //General
-            //    string wallName = Path.GetFileName(x._wallpaper);
-            //    string musicName = Path.GetFileName(x._music);
+            foreach (Level x in myGame._levels)
+            {
+                //General
+                string wallName = Path.GetFileName(x._wallpaper);
+                string musicName = Path.GetFileName(x._music);
             //    File.Copy(x._wallpaper, CreatedGamePath + "\\" + wallName);
             //    File.Copy(x._music, CreatedGamePath + "\\" + musicName);
-            //    x._wallpaper = wallName;
-            //    x._music = musicName;
+                x._wallpaper = wallName;
+                x._music = musicName;
 
             //    //Enemy
-            //    foreach (EnemyShip z in x._enemy)
-            //    {
-            //        string EshipSprite = Path.GetFileName(z._shipSprite);
-            //        string EweaponSprite = Path.GetFileName(z._weaponSprite);
+                foreach (EnemyShip z in x._enemy)
+                {
+                    string EshipSprite = Path.GetFileName(z._shipSprite);
+                    string EweaponSprite = Path.GetFileName(z._weaponSprite);
             //        File.Copy(x._wallpaper, CreatedGamePath + "\\" + EshipSprite);
             //        File.Copy(x._music, CreatedGamePath + "\\" + EweaponSprite);
-            //        z._shipSprite = EshipSprite;
-            //        z._weaponSprite = EweaponSprite;
-            //    }
-            //}
+                    z._shipSprite = EshipSprite;
+                    z._weaponSprite = EweaponSprite;
+                }
+            }
 
             ////Player
-            //string UshipSprite = Path.GetFileName(myGame._player._shipSprite);
-            //string UweaponSprite = Path.GetFileName(myGame._player._weaponSprite);
+            string UshipSprite = Path.GetFileName(myGame._player._shipSprite);
+            string UweaponSprite = Path.GetFileName(myGame._player._weaponSprite);
             //File.Copy(myGame._player._shipSprite, CreatedGamePath + "\\" + UshipSprite);
             //File.Copy(myGame._player._weaponSprite, CreatedGamePath + "\\" + UweaponSprite);
-            //myGame._player._shipSprite = UshipSprite;
-            //myGame._player._weaponSprite = UweaponSprite;
+            myGame._player._shipSprite = UshipSprite;
+            myGame._player._weaponSprite = UweaponSprite;
         }
 
         public static ShootEmUpGame ImportGame(string path)
