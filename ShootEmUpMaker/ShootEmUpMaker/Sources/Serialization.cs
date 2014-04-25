@@ -41,7 +41,7 @@ namespace ShootEmUpMaker
             Directory.CreateDirectory(CreatedGamePath + "\\player");
             Directory.CreateDirectory(CreatedGamePath + "\\enemy");
 
-<<<<<<< HEAD
+
             ////Copying ressources to folder
             //foreach (Level x in myGame._levels)
             //{
@@ -72,38 +72,6 @@ namespace ShootEmUpMaker
             //File.Copy(myGame._player._weaponSprite, CreatedGamePath + "\\" + UweaponSprite);
             //myGame._player._shipSprite = UshipSprite;
             //myGame._player._weaponSprite = UweaponSprite;
-=======
-            //Copying ressources to folder
-            foreach (Level x in myGame._levels)
-            {
-                //General
-                string wallName = Path.GetFileName(x._wallpaper);
-                string musicName = Path.GetFileName(x._music);
-                File.Copy(x._wallpaper, CreatedGamePath + "\\" + wallName);
-                File.Copy(x._music, CreatedGamePath + "\\" + musicName);
-                x._wallpaper = wallName;
-                x._music = musicName;
-
-                //Enemy
-                foreach (EnemyShip z in x._enemy)
-                {
-                    string EshipSprite = Path.GetFileName(z._shipSprite);
-                    string EweaponSprite = Path.GetFileName(z._weaponSprite);
-                    File.Copy(x._wallpaper, CreatedGamePath + "\\" + EshipSprite);
-                    File.Copy(x._music, CreatedGamePath + "\\" + EweaponSprite);
-                    z._shipSprite = EshipSprite;
-                    z._weaponSprite = EweaponSprite;
-                }
-            }
-
-            //Player
-            string UshipSprite = Path.GetFileName(myGame._player._shipSprite);
-            string UweaponSprite = Path.GetFileName(myGame._player._weaponSprite);
-            File.Copy(myGame._player._shipSprite, CreatedGamePath + "\\" + UshipSprite);
-            File.Copy(myGame._player._weaponSprite, CreatedGamePath + "\\" + UweaponSprite);
-            myGame._player._shipSprite = UshipSprite;
-            myGame._player._weaponSprite = UweaponSprite;
->>>>>>> 42aef0e93ccc0a5a98b0cf03c48874cb090d91c2
         }
 
         public static ShootEmUpGame ImportGame(string path)
