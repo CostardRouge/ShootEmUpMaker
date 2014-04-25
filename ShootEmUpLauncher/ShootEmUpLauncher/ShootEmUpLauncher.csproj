@@ -62,6 +62,9 @@
     <Content Include="openal32.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="sfmlnet-audio-2.dll" />
+    <Content Include="sfmlnet-graphics-2.dll" />
+    <Content Include="sfmlnet-window-2.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src\Shot.cs" />
