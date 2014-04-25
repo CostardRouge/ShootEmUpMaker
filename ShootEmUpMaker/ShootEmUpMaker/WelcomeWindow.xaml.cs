@@ -71,6 +71,14 @@ namespace ShootEmUpMaker
         void OpenCreatedGame(object sender, MouseButtonEventArgs e)
         {
             MessageBox.Show(Application.Current.Windows.Count.ToString());
+
+            ShootEmUpGame myGame = new ShootEmUpGame();
+            String UserDocumentPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            String CreatedGamePath = UserDocumentPath + "\\" + PROJECT_NAME;
+
+            // List and load created games
+            String[] CreatedGamesFiles = Directory.GetFiles(@CreatedGamePath, "*.xml", SearchOption.AllDirectories);
+            myGame = Serialization.ImportGame(CreatedGamesFiles[0]);
         }
 
         public WelcomeWindow()
