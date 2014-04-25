@@ -16,7 +16,7 @@
                 <WrapPanel x:Name="Games" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                     
                     <Border Width="140" Height="260" Margin="5,5" Background="#FF525252">
-                        <TextBlock x:Name="CreateButton" Text="+" HorizontalAlignment="Center" VerticalAlignment="Center" ToolTip="Click here to create a new game" FontSize="36" Foreground="White" FontWeight="Thin" />
+                        <TextBlock x:Name="CreateButton" Text="+" ToolTip="Click here to create a new game" FontSize="36" Foreground="White" FontWeight="Thin" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" />
                     </Border>
                 </WrapPanel>
             </ScrollViewer>

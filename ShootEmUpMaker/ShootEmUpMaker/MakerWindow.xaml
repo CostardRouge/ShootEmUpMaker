@@ -2,6 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Shoot'em up Maker" Height="725" Width="800">
+    
     <Window.Resources>
         <ItemsPanelTemplate x:Key="Banner">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right"/>
@@ -49,7 +50,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Border BorderBrush="#FFA41818" BorderThickness="0,0,0,1">
-                <TextBlock x:Name="GameNameTexBlock" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Padding="10,0,5,0" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" FontWeight="Thin" >ggg</TextBlock>
+                <TextBlock x:Name="GameNameTexBlock" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Padding="10,0,5,0" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" FontWeight="Thin" >Your game title is here (5 levels)</TextBlock>
             </Border>
             <ListBox SelectedIndex="0" BorderBrush="#FFA41818" BorderThickness="0,0,0,1" ItemsPanel="{DynamicResource Banner}" Height="48" Grid.ColumnSpan="2" Grid.Column="1" Background="{x:Null}">
                 <ListBoxItem Content="Preview game" Template="{DynamicResource BannerItem}" ToolTip="Preview the current game..." ></ListBoxItem>
@@ -82,11 +83,16 @@
         </ScrollViewer>
         
         <Grid x:Name="Panels">
-            <StackPanel x:Name="GeneralSettingsPanel" Visibility="Hidden" Margin="100,0">
+            <Label Visibility="Visible" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Thin" FontSize="36">
+                Create your own Shoot'em up game :)
+            </Label>
+
+            <StackPanel DataContext="{Binding myBinding}" x:Name="GeneralSettingsPanel" Visibility="Hidden" Margin="100,0">
                 <Label HorizontalAlignment="Center" VerticalAlignment="Center">
                     Game name :
                 </Label>
-                <TextBox x:Name="gameNameTextBox" />
+                
+                <TextBox x:Name="gameNameTextBox" Text="{Binding Path=Name}" />
 
                 <Label HorizontalAlignment="Center" VerticalAlignment="Center">
                     Game description :

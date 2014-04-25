@@ -18,7 +18,7 @@ namespace ShootEmUpMaker
         {
             // Init attributes
             this.welcomeWindow = new ShootEmUpMaker.WelcomeWindow();
-            this.makerWindow = new ShootEmUpMaker.MakerWindow();
+            this.makerWindow = null;
 
             // Showing default windows
             this.welcomeWindow.Show();
@@ -26,8 +26,9 @@ namespace ShootEmUpMaker
             // Init events
             this.welcomeWindow.CreateButton.MouseDown += CreateNewGame;
             this.welcomeWindow.Closed += welcomeWindowClosed;
-            this.makerWindow.Closed += makerWindowClosed;
+            
         }
+
 
         void welcomeWindowClosed(object sender, EventArgs e)
         {
@@ -36,19 +37,26 @@ namespace ShootEmUpMaker
 
         void makerWindowClosed(object sender, EventArgs e)
         {
-            App.Current.Shutdown(0);
+            this.makerWindow = null;
+            this.welcomeWindow.Show();
+            //this.makerWindow.Hide();
         }
 
         void CreateNewGame(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             this.welcomeWindow.Hide();
-            this.makerWindow.Show();
+            if (this.makerWindow == null)
+            {
+                this.makerWindow = new ShootEmUpMaker.MakerWindow();
+                this.makerWindow.Closed += makerWindowClosed;
+                this.makerWindow.Show();
+            }
         }
         #endregion
 
         #region Attributes
         private ShootEmUpMaker.WelcomeWindow    welcomeWindow;
-        private ShootEmUpMaker.MakerWindow      makerWindow;
+        public ShootEmUpMaker.MakerWindow      makerWindow;
         #endregion
     }
 }

@@ -62,6 +62,12 @@ namespace ShootEmUpMaker
 
             // Show the concerned panel
             this.GeneralSettingsPanel.Visibility = Visibility.Visible;
+
+            Binding myBinding = new Binding("GameProperty");
+
+
+            myBinding.Source = this.game;
+            this.gameNameTextBox.SetBinding(TextBlock.TextProperty, myBinding);
         }
 
         void CreateNewLevel(object sender, MouseButtonEventArgs e)
@@ -94,6 +100,9 @@ namespace ShootEmUpMaker
 
             // Scroll down the PanelSwitcherViewer
             this.PanelSwitcherViewer.ScrollToBottom();
+
+
+            MessageBox.Show(this.game.Name);
         }
     }
 }

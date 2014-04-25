@@ -41,17 +41,25 @@ namespace ShootEmUpMaker
                 text.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
                 text.FontWeight = FontWeights.Thin;
                 text.Text = System.IO.Path.GetFileNameWithoutExtension(filePath);
-
+                
                 border.Child = text;
                 border.Name = "Game" + i.ToString();
+                border.Cursor = Cursors.Hand;
                 border.Background = new SolidColorBrush(Color.FromRgb(194, 32, 38));
                 border.Margin = new Thickness(5, 5, 5, 5);
+                border.MouseDown += OpenCreatedGame;
 
                 this.Games.Children.Insert(0, border);
             }
 
             // Updated created games information text
-            this.gamesCreatedTextBlock.Text = String.Format("{0} game{1} already created.", FileCount, (FileCount > 1 ? "s" : null));
+            this.gamesCreatedTextBlock.Text = String.Format("{0} game{1} already created.", FileCount, FileCount > 1 ? "s" : null);
+        }
+
+        void OpenCreatedGame(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show(Application.Current.Windows.Count.ToString());
+            ;
         }
 
         public WelcomeWindow()
