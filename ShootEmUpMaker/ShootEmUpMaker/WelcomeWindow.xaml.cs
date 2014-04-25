@@ -72,7 +72,6 @@ namespace ShootEmUpMaker
 
         void OpenCreatedGame(object sender, MouseButtonEventArgs e)
         {
-<<<<<<< HEAD
             //MessageBox.Show(Application.Current.Windows.Count.ToString());
 
             String UserDocumentPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -80,24 +79,19 @@ namespace ShootEmUpMaker
 
             // List and load created games
             String[] CreatedGamesFiles = Directory.GetFiles(@CreatedGamePath, "*.xml", SearchOption.AllDirectories);
-            MessageBox.Show(CreatedGamesFiles[0]);
-=======
+
             // Get created games path
             Border b = (Border)sender;
             TextBlock t = (TextBlock)b.Child;
             String gamePath = CreatedGamesFound.Find(x => x.Item1.Equals(t.Text)).Item2;
 
-            MessageBox.Show(gamePath);
+            //MessageBox.Show(gamePath);
             // WAY 1 : var win =  Application.Current.Properties["makerWindow"];
->>>>>>> 13f67dba35d6a900458232dbae694e1eec29eee4
 
             App MyApplication = ((App)Application.Current);
             MyApplication.makerWindow = new MakerWindow();
-<<<<<<< HEAD
-            MyApplication.makerWindow.game = Serialization.ImportGame(CreatedGamesFiles[0]);
-=======
+
             MyApplication.makerWindow.game = Serialization.ImportGame(gamePath);
->>>>>>> 13f67dba35d6a900458232dbae694e1eec29eee4
             MyApplication.makerWindow.Closed += MyApplication.makerWindowClosed;
             MyApplication.makerWindow.Show();
 
