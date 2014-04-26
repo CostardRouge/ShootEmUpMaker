@@ -10,23 +10,30 @@ namespace ShootEmUpMaker
 {
     public static class Serialization
     {
-        public static void ExportGame(ShootEmUpGame myGame)
+        public static void ExportGame(ShootEmUpGame game)
         {
             //Create game folder
-            string GamePath = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\ShootEmUpMaker\\";
-            Directory.CreateDirectory(GamePath + myGame._name);
+            String ExportPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            ExportPath += "\\ShootEmUpMaker\\";
+            String GameFolderPath = ExportPath + game._name;
+            String GameFilePath = GameFolderPath + "\\" + game._name + ".xml";
+            Directory.CreateDirectory(GameFolderPath);
 
             //Copy ressources to game folder
-            copyRessources(myGame);
+            try
+            {
+                Serialization.copyRessources(game);
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.ToString());
+            }
 
             //Create xml file in game folder    
             XmlSerializer xs = new XmlSerializer(typeof(ShootEmUpGame));
-            using (StreamWriter wr = new StreamWriter(GamePath + 
-                myGame._name + 
-                "\\" +
-                myGame._name + ".xml"))
+            using (StreamWriter wr = new StreamWriter(GameFilePath))
             {
-                xs.Serialize(wr, myGame);
+                xs.Serialize(wr, game);
             }
         }
 
@@ -40,7 +47,6 @@ namespace ShootEmUpMaker
             Directory.CreateDirectory(CreatedGamePath + "\\general");
             Directory.CreateDirectory(CreatedGamePath + "\\player");
             Directory.CreateDirectory(CreatedGamePath + "\\enemy");
-
 
             ////Copying ressources to folder
             foreach (Level x in myGame._levels)
@@ -90,7 +96,7 @@ namespace ShootEmUpMaker
                 }
                 catch (Exception e)
                 {
-                    System.Windows.MessageBox.Show(e.ToString());  
+                    System.Windows.MessageBox.Show(e.ToString());
                 }
             }
             return myGame;
