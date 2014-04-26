@@ -7,13 +7,13 @@ using System.Diagnostics;
 
 namespace ShootEmUpLauncher
 {
-    class UserShipSprite : IObject
+    class UserShipDrawable : AObject
     {
-        UserShip _userShipData;
+        ShootEmUpMaker.UserShip _userShipData;
         public int _life { get; set; }
         public SFML.Graphics.Sprite _sprite { get; set; }
 
-        public UserShipSprite(UserShip data)
+        public UserShipDrawable(UserShip data)
         {
             _sprite = new SFML.Graphics.Sprite();
             _userShipData = data;
@@ -22,13 +22,12 @@ namespace ShootEmUpLauncher
             _sprite.Position = new SFML.Window.Vector2f(50, 50);
         }
 
-
-        public void show(SFML.Graphics.RenderWindow window)
+        public void Show(SFML.Graphics.RenderWindow window)
         {
             window.Draw(_sprite);
         }
 
-        public void update(SFML.Graphics.RenderWindow window, orientation orientation, List<IObject> list, Stopwatch touch, Stopwatch shot)
+        public void Update(SFML.Graphics.RenderWindow window, orientation orientation, List<IObject> list, Stopwatch touch, Stopwatch shot)
         {
             if (SFML.Window.Keyboard.IsKeyPressed(SFML.Window.Keyboard.Key.Left) && (_sprite.Position.X - 0.1f > 0))
                 _sprite.Position = new SFML.Window.Vector2f(_sprite.Position.X - 0.1f, _sprite.Position.Y);

@@ -10,6 +10,7 @@ using System.Timers;
 using SFML;
 using SFML.Graphics;
 using SFML.Window;
+using ShootEmUp.Enumrations;
 
 namespace ShootEmUpLauncher
 {
@@ -43,8 +44,15 @@ namespace ShootEmUpLauncher
             this.Quit = false;
             this.CurrentSection = ShootEmUp.Enumrations.eSection.MAIN_MENU;
 
-            //Sprite text = new Sprite();
-            this.VideoMode = new VideoMode(1024, 600, 32);
+            // Window creation
+            var ScreenSizes = new List<Tuple<eOrientation, uint, uint>>();
+            ScreenSizes.Add(new Tuple<eOrientation, uint, uint>(eOrientation.HORIZONTAL, 1024, 600));
+            ScreenSizes.Add(new Tuple<eOrientation, uint, uint>(eOrientation.VERTICAL, 700, 400));
+
+            uint w = ScreenSizes.Find(a => a.Item1 == this.Game._orientation).Item2;
+            uint h = ScreenSizes.Find(a => a.Item1 == this.Game._orientation).Item3;
+
+            this.VideoMode = new VideoMode(w, h, 32);
             this.Window = new RenderWindow(this.VideoMode, this.Game._name);
 
             // Init events
@@ -80,7 +88,10 @@ namespace ShootEmUpLauncher
                 Section.Update();
 
             // Core Update
-            this.Objects.Select(o => o.Update());
+            // this.Objects.Select(o => o.Update());
+
+            // Gameplay resolving
+            // here
         }
 
         public void Display()
@@ -91,7 +102,7 @@ namespace ShootEmUpLauncher
                 Section.Display();
 
             // Core Display
-            this.Objects.Select(o => o.Display());
+            //this.Objects.Select(o => o.Display());
         }
 
         static void Main(string[] args)
@@ -100,31 +111,31 @@ namespace ShootEmUpLauncher
             Core.Run();
           
 
-            EnemyShip enemy = new EnemyShip();
-            enemy._shipSprite = "ship.png";
+            //EnemyShip enemy = new EnemyShip();
+            //enemy._shipSprite = "ship.png";
 
-            UserShip user = new UserShip();
-            user._fireRate = 1;
-            user._life = 3;
-            user._shipSprite = "ship.png";
-            user._weaponSprite = "ship.png";
-            UserShipSprite ship = new UserShipSprite(user);
+            //UserShip user = new UserShip();
+            //user._fireRate = 1;
+            //user._life = 3;
+            //user._shipSprite = "ship.png";
+            //user._weaponSprite = "ship.png";
+            //UserShipSprite ship = new UserShipSprite(user);
 
-            game._levels = new List<Level>();
+            //game._levels = new List<Level>();
 
-            Level lvl = new Level();
+            //Level lvl = new Level();
 
-            lvl._wallpaper = "17.png";
-            lvl._music = "music.ogg";
-            lvl._enemy = new List<EnemyShip>();
-            lvl._enemy.Add(enemy);
-            lvl._enemy.Add(enemy);
-            lvl._enemy.Add(enemy);
+            //lvl._wallpaper = "17.png";
+            //lvl._music = "music.ogg";
+            //lvl._enemy = new List<EnemyShip>();
+            //lvl._enemy.Add(enemy);
+            //lvl._enemy.Add(enemy);
+            //lvl._enemy.Add(enemy);
 
-            game._levels.Add(lvl);
+            //game._levels.Add(lvl);
 
-            game._objects = new List<IObject>();
-            game._objects.Add(ship);
+            //game._objects = new List<IObject>();
+            //game._objects.Add(ship);
                         
             //while ()
             //{
@@ -142,49 +153,46 @@ namespace ShootEmUpLauncher
 
         // Display functions
 
-        void displayLevel(Core game, SFML.Graphics.RenderWindow window, Level item)
-        {
-            int count = 0;
-            Sprite text = new Sprite();
-            SFML.Audio.Music music = new SFML.Audio.Music(item._music);
+        //void displayLevel(Core game, SFML.Graphics.RenderWindow window, Level item)
+        //{
+        //    int count = 0;
+        //    Sprite text = new Sprite();
+        //    SFML.Audio.Music music = new SFML.Audio.Music(item._music);
 
-            music.Play();
-            game._background.Texture = new SFML.Graphics.Texture(item._wallpaper, new SFML.Graphics.IntRect(0, 0, (int)game._x, (int)game._y));
-            game.displayText(text, "start.png", game, window);
-            while (item._enemy.Count > count || game._objects.OfType<EnemyShipSprite>().Count() > 0)
-            {
-                if (game._timer.ElapsedMilliseconds >= 3000 && item._enemy.Count > count)
-                {
-                    game._objects.Add(new EnemyShipSprite(item._enemy[count++]));
-                    game._timer.Restart();
-                }
-                window.DispatchEvents();
-                window.Clear();
-                window.Draw(game._background);
-                for (var x = 0; x < game._objects.Count; x++)
-                {
-                    game._objects[x].show(window);
-                    game._objects[x].update(window, game._orientation, game._objects, game._lastTouch, game._lastShot);
-                }
-                if (game._objects.OfType<UserShipSprite>().Count() == 0)
-                    return;
-                window.Display();
-            }
-            game.displayText(text, "levelcomplete.png", game, window);
-            music.Stop();
-        }
+        //music.Play();
+        //game._background.Texture = new SFML.Graphics.Texture(item._wallpaper, new SFML.Graphics.IntRect(0, 0, (int)game._x, (int)game._y));
+        //game.displayText(text, "start.png", game, window);
+        //while (item._enemy.Count > count || game._objects.OfType<EnemyShipSprite>().Count() > 0)
+        //{
+        //    if (game._timer.ElapsedMilliseconds >= 3000 && item._enemy.Count > count)
+        //    {
+        //        game._objects.Add(new EnemyShipSprite(item._enemy[count++]));
+        //        game._timer.Restart();
+        //    }
+        //    window.DispatchEvents();
+        //    window.Clear();
+        //    window.Draw(game._background);
+        //    for (var x = 0; x < game._objects.Count; x++)
+        //    {
+        //        game._objects[x].show(window);
+        //        game._objects[x].update(window, game._orientation, game._objects, game._lastTouch, game._lastShot);
+        //    }
+        //    window.Display();
+        //}
+        //game.displayText(text, "levelcomplete.png", game, window);
+        //music.Stop();
+        //}
 
-        void displayText(Sprite text, string file, Core game, SFML.Graphics.RenderWindow window)
-        {
-            window.Clear();
-            text.Texture = new SFML.Graphics.Texture(file, new SFML.Graphics.IntRect(0, 0, (int)game._x, (int)game._y));
-            window.Draw(text);
-            window.Display();
-            Thread.Sleep(2000);
-        }
+        //void displayText(Sprite text, string file, Core game, SFML.Graphics.RenderWindow window)
+        //{
+        //    window.Clear();
+        //    text.Texture = new SFML.Graphics.Texture(file, new SFML.Graphics.IntRect(0, 0, (int)game._x, (int)game._y));
+        //    window.Draw(text);
+        //    window.Display();
+        //    Thread.Sleep(2000);
+        //}
 
         // Events Handler functions
-
         static void OnClose(object sender, EventArgs e)
         {
             RenderWindow window = (RenderWindow)sender;
