@@ -24,16 +24,27 @@ namespace ShootEmUpMaker
         private static String PROJECT_NAME = "ShootEmUpMaker";
         private List<Tuple<String, String>> CreatedGamesFound = new List<Tuple<String, String>> ();
 
-        public ImageBrush getGameBackground(string gamePath)
+        private Brush getGameBackground(string gamePath)
         {
+            Brush ret = null;
             ShootEmUpGame game = Serialization.ImportGame(gamePath);
-            ImageBrush ret = new ImageBrush(new BitmapImage(new Uri(game._wallpaper, UriKind.Relative)));
 
+            if (game != null && File.Exists(game._wallpaper))
+            {
+                try {
+                    new Uri(game._wallpaper, UriKind.Relative);
+                    ret = new ImageBrush(new BitmapImage());
+                }
+                catch (Exception e) {
+                    Console.WriteLine(e.ToString());
+                }
+            }
+            else
+                ret = new SolidColorBrush(Color.FromRgb(194, 32, 38));
             return ret;
         }
 
-
-        public void AddCreatedGames(String[] CreatedGamesFiles)
+        private void AddCreatedGames(String[] CreatedGamesFiles)
         {
             int i = 1;
             foreach (String filePath in CreatedGamesFiles)
@@ -41,39 +52,56 @@ namespace ShootEmUpMaker
                 var border = new Border() { Width = 140, Height = 260 };
                 var text = new TextBlock() { FontSize = 14 };
 
-                text.HorizontalAlignment = HorizontalAlignment.Center;
-                text.VerticalAlignment = VerticalAlignment.Center;
-                text.TextWrapping = TextWrapping.Wrap;
-                text.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
                 text.FontWeight = FontWeights.Thin;
+                text.TextWrapping = TextWrapping.Wrap;
+                text.VerticalAlignment = VerticalAlignment.Center;
+                text.HorizontalAlignment = HorizontalAlignment.Center;
                 text.Text = System.IO.Path.GetFileNameWithoutExtension(filePath);
+                text.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
 
                 border.Child = text;
-                border.Name = "Game" + i.ToString();
                 border.Cursor = Cursors.Hand;
-                border.Background = getGameBackground(filePath);
-               // border.Background = new SolidColorBrush(Color.FromRgb(194, 32, 38));
-                border.Margin = new Thickness(5, 5, 5, 5);
                 border.MouseDown += OpenCreatedGame;
+                border.Name = "Game" + i.ToString();
+                border.Margin = new Thickness(5, 5, 5, 5);
+                border.Background = getGameBackground(filePath);
                 
                 this.Games.Children.Insert(0, border);
                 this.CreatedGamesFound.Add(new Tuple<String, String>(text.Text, filePath));
             }
         }
 
+        private String[] GetCreatedGames(String ExportFolderPath)
+        {
+            String[] ret = null;
+            
+            try {
+                ret = Directory.GetDirectories(ExportFolderPath);
+            }
+            catch (Exception e) {
+                Console.WriteLine("GetDirectories failed: {0}", e.ToString());
+            }
+            return (ret);
+        }
+
         public void LoadCreatedGames()
         {
             String UserDocumentPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            String CreatedGamePath = UserDocumentPath + "\\" + PROJECT_NAME;
+            String ExportFolderPath = UserDocumentPath + "\\" + PROJECT_NAME;
+
             try
             {
                 // List and load created games
-                String[] CreatedGamesFiles = Directory.GetFiles(@CreatedGamePath, "*.xml", SearchOption.AllDirectories);
-                this.AddCreatedGames(CreatedGamesFiles);
+                String[] CreatedGames = Directory.GetFiles(@ExportFolderPath, "*.xml", SearchOption.AllDirectories);
+                this.AddCreatedGames(CreatedGames);
 
                 // Updated created games information text
-                int FileCount = CreatedGamesFiles.Length;
-                this.gamesCreatedTextBlock.Text = String.Format("{0} game{1} already created.", FileCount, FileCount > 1 ? "s" : null);
+                int GamesCount = CreatedGames.Length;
+                if (GamesCount > 1)
+                {
+                    String tmp = String.Format("{0} game{1} already created.", GamesCount, GamesCount > 1 ? "s" : null);
+                    this.infoTextBlock.Text = tmp;
+                }
             }
             catch (Exception e)
             {
@@ -83,26 +111,18 @@ namespace ShootEmUpMaker
 
         void OpenCreatedGame(object sender, MouseButtonEventArgs e)
         {
-            //MessageBox.Show(Application.Current.Windows.Count.ToString());
-
             String UserDocumentPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             String CreatedGamePath = UserDocumentPath + "\\" + PROJECT_NAME;
-
-            // List and load created games
-            String[] CreatedGamesFiles = Directory.GetFiles(@CreatedGamePath, "*.xml", SearchOption.AllDirectories);
 
             // Get created games path
             Border b = (Border)sender;
             TextBlock t = (TextBlock)b.Child;
             String gamePath = CreatedGamesFound.Find(x => x.Item1.Equals(t.Text)).Item2;
 
-            //MessageBox.Show(gamePath);
             // WAY 1 : var win =  Application.Current.Properties["makerWindow"];
-
+            // WAY 2 : I prefer this one
             App MyApplication = ((App)Application.Current);
-            MyApplication.makerWindow = new MakerWindow();
-
-            MyApplication.makerWindow.game = Serialization.ImportGame(gamePath);
+            MyApplication.makerWindow = new MakerWindow(Serialization.ImportGame(gamePath));
             MyApplication.makerWindow.Closed += MyApplication.makerWindowClosed;
             MyApplication.makerWindow.Show();
 
@@ -114,68 +134,45 @@ namespace ShootEmUpMaker
             // Inits
             InitializeComponent();
 
-            // Init events
-            // export
-            // impport
-            // close (save or cancel dialog)
-
             // Default actions
             LoadCreatedGames();
 
-<<<<<<< HEAD
-            //Enemy Ship
-=======
-            ////Enemy Ship
->>>>>>> 1edd821d6bf0d4efb4696f5918f66249d33d4891
-            EnemyShip enemy = new EnemyShip();
-            enemy._weaponSprite = "here";
-            enemy._shipSprite = "here";
-            enemy._damage = 1;
-            enemy._fireRate = 1;
-            enemy._point = 10;
+        //    //Enemy Ship
+        //    EnemyShip enemy = new EnemyShip();
+        //    enemy._weaponSprite = "here";
+        //    enemy._shipSprite = "here";
+        //    enemy._damage = 1;
+        //    enemy._fireRate = 1;
+        //    enemy._point = 10;
 
-<<<<<<< HEAD
-            //UserShip
-=======
-            ////UserShip
->>>>>>> 1edd821d6bf0d4efb4696f5918f66249d33d4891
-            UserShip player = new UserShip();
-            player._weaponSprite = "here";
-            player._shipSprite = "here";
-            player._damage = 1;
-            player._fireRate = 1;
-            player._life = 3;
+        //    //UserShip
+        //    UserShip player = new UserShip();
+        //    player._weaponSprite = "here";
+        //    player._shipSprite = "here";
+        //    player._damage = 1;
+        //    player._fireRate = 1;
+        //    player._life = 3;
 
-<<<<<<< HEAD
-            //Level
-=======
-            ////Level
->>>>>>> 1edd821d6bf0d4efb4696f5918f66249d33d4891
-            Level lvl = new Level();
-            lvl._wallpaper = "Here";
-            lvl._music = "Here";
-            lvl._enemy.Add(enemy);
-            lvl._enemy.Add(enemy);
+        //    //Level
+        //    Level lvl = new Level();
+        //    lvl._wallpaper = "Here";
+        //    lvl._music = "Here";
+        //    lvl._enemy.Add(enemy);
+        //    lvl._enemy.Add(enemy);
 
-            ShootEmUpGame myGame = new ShootEmUpGame();
-            myGame._name = "Best game ever";
-            myGame._description = "This is my game";
-            myGame._author = "Alex";
-<<<<<<< HEAD
-=======
-            myGame._wallpaper = "17.png";
->>>>>>> 1edd821d6bf0d4efb4696f5918f66249d33d4891
-            myGame._orientation = 0;
-            myGame._player = player;
-            myGame._levels.Add(lvl);
-            myGame._levels.Add(lvl);
+        //    ShootEmUpGame myGame = new ShootEmUpGame();
+        //    myGame._name = "Best game ever";
+        //    myGame._description = "This is my game";
+        //    myGame._author = "Alex";
+        //    myGame._wallpaper = "17.png";
+        //    myGame._orientation = 0;
+        //    myGame._player = player;
+        //    myGame._levels.Add(lvl);
+        //    myGame._levels.Add(lvl);
 
-<<<<<<< HEAD
-            //Serialization
-=======
-            ////Serialization
->>>>>>> 1edd821d6bf0d4efb4696f5918f66249d33d4891
-            Serialization.ExportGame(myGame);
+        //    //Serialization
+        //    Serialization.ExportGame(myGame);
+        //
         }
     }
 }
