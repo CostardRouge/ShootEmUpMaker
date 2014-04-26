@@ -18,7 +18,7 @@ namespace ShootEmUpMaker
 
         public Level()
         {
-        this._enemy = new List<EnemyShip>();
+            this._enemy = new List<EnemyShip>();
         }
     }   
 }

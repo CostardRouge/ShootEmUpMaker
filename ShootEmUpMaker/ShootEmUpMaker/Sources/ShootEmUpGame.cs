@@ -9,7 +9,7 @@ namespace ShootEmUpMaker
 {
     public class ShootEmUpGame
     {
-        public string Name { get; set; }
+        public string _name { get; set; }
         public string _author { get; set; }
         public string _description { get; set; }
         public string _wallpaper { get; set; }
@@ -28,6 +28,5 @@ namespace ShootEmUpMaker
             this._player = new UserShip();
         }
 
-        public string _name { get; set; }
     }
 }
