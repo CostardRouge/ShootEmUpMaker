@@ -50,7 +50,7 @@ namespace ShootEmUpMaker
             foreach (String filePath in CreatedGamesFiles)
             {
                 var border = new Border() { Width = 140, Height = 260 };
-                var text = new TextBlock() { FontSize = 14 };
+                var text = new TextBlock() { FontSize = 18 };
 
                 text.FontWeight = FontWeights.Thin;
                 text.TextWrapping = TextWrapping.Wrap;
@@ -65,7 +65,7 @@ namespace ShootEmUpMaker
                 border.Name = "Game" + i.ToString();
                 border.Margin = new Thickness(5, 5, 5, 5);
                 border.Background = getGameBackground(filePath);
-                
+
                 this.Games.Children.Insert(0, border);
                 this.CreatedGamesFound.Add(new Tuple<String, String>(text.Text, filePath));
             }
@@ -82,6 +82,12 @@ namespace ShootEmUpMaker
                 Console.WriteLine("GetDirectories failed: {0}", e.ToString());
             }
             return (ret);
+        }
+
+        public void ClearCreatedGameCards()
+        {
+            if (this.Games.Children.Count > 1)
+                this.Games.Children.RemoveRange(0, this.Games.Children.Count - 1);
         }
 
         public void LoadCreatedGames()

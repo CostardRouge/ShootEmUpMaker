@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
 
 namespace ShootEmUpMaker
 {
@@ -20,48 +21,38 @@ namespace ShootEmUpMaker
     /// </summary>
     public partial class MakerWindow : Window
     {
-        public ShootEmUpGame game { get; set; }
+        private ShootEmUpGame game { get; set; }
 
-        public MakerWindow()
+        public MakerWindow(ShootEmUpGame _game = null)
         {
             // Inits
             InitializeComponent();
-            this.game = new ShootEmUpGame();
 
-            // test
-            this.game.Name = "totot";
-
-
-            // affect
-            this.gameNameTextBox.Text = this.game.Name;
-
+            // Default actions
+            this.game = _game != null ? _game : new ShootEmUpGame();
+            this.LoadGameObject();
 
             // Init events
+            this.gameNameTextBox.TextChanged += gameNameTextBoxTextChanged;
             this.GeneralSettingsTextBlock.MouseDown += GeneralSettingsTextBlockMouseDown;
             this.MenuAndPlayerTextBlock.MouseDown += MenuAndPlayerPanelMouseDown;
             this.CreateNewLevelButton.MouseDown += CreateNewLevel;
-
-            SetGameObjectToView();    
-
         }
 
-        void SetGameObjectToView()
+        void LoadGameObject()
         {
-            this.game.Name = "NAVION";
-            this.game._description = "jeu DE NAVION NERVEU";
-            this.game._author = "SPLEFAN LE AUTOR";
+            // Basics
+            if (this.game._name != null)
+            {
+                this.HomePageTextBlock.Visibility = Visibility.Hidden;
+                this.GeneralSettingsTextBlockMouseDown(null, null);
+            }
+            this.UpdateGameNameTextBlock();
 
-            this.gameNameTextBox.Text = this.game.Name;
-            this.gameDescriptionTextbox.Text = this.game._description;
-            this.gameAuthorTextbox.Text = this.game._author;
-
-            this.game._player._shipSprite = "THE ENTREPRISE";
-            this.game._player._weaponSprite = "DOUBLE CANON";
-            this.game._player._life = 5;
-
-            this.playerSpriteTextBox.Text = this.game._player._shipSprite;
-            this.weaponSpriteTextbox.Text = this.game._player._weaponSprite;
-            this.playerLifeTextbox.Text = this.game._player._life.ToString();
+            // Load levels data
+            this.game._levels.ForEach(l => this.AddLevelObject(l));
+            if (this.game._levels.Count > 0)
+                this.CreateNewLevelButton.Text = "Add another level...";
         }
 
         void LevelTextBlockMouseDown(object sender, MouseButtonEventArgs e)
@@ -72,6 +63,12 @@ namespace ShootEmUpMaker
 
             // Show the concerned panel
             this.LevelPanel.Visibility = Visibility.Visible;
+            
+            // Bind level object content to the panel
+            TextBlock LevelTextBlock = (TextBlock)sender;
+           
+            ShootEmUpMaker.Level lvl = this.game._levels.Find(l => l._name.Equals(LevelTextBlock.Text));
+            this.LevelPanel.DataContext = lvl;
         }
 
         void MenuAndPlayerPanelMouseDown(object sender, MouseButtonEventArgs e)
@@ -82,6 +79,9 @@ namespace ShootEmUpMaker
 
             // Show the concerned panel
             this.MenuAndPlayerPanel.Visibility = Visibility.Visible;
+
+            // Bind date to view
+            this.MenuAndPlayerPanel.DataContext = this.game;
         }
 
         void GeneralSettingsTextBlockMouseDown(object sender, MouseButtonEventArgs e)
@@ -93,25 +93,16 @@ namespace ShootEmUpMaker
             // Show the concerned panel
             this.GeneralSettingsPanel.Visibility = Visibility.Visible;
 
-            Binding myBinding = new Binding("GameProperty");
-
-
-            myBinding.Source = this.game;
-            this.gameNameTextBox.SetBinding(TextBlock.TextProperty, myBinding);
+            // Bind date to view
+            this.GeneralSettingsPanel.DataContext = this.game;
         }
 
-        void CreateNewLevel(object sender, MouseButtonEventArgs e)
+        void AddLevelObject(ShootEmUpMaker.Level Level)
         {
-            // 
-            int LevelsCount = this.game._levels.Count;
-            ShootEmUpMaker.Level NewLevel = new ShootEmUpMaker.Level() { _number=LevelsCount + 1};
-            NewLevel._name = String.Format("Level #{0}", NewLevel._number);
-            this.game._levels.Add(NewLevel);
-
             // Add a the level to the panel switcher
-            TextBlock NewLevelTextBlock = new TextBlock() { Height=160, FontSize=18};
-            NewLevelTextBlock.Text = NewLevel._name;
-            NewLevelTextBlock.ToolTip = "LOL";
+            TextBlock NewLevelTextBlock = new TextBlock() { Height = 160, FontSize = 18 };
+            NewLevelTextBlock.Text = Level._name;
+            NewLevelTextBlock.ToolTip = String.Format("Click here to edit level #{0}", Level._number);
             NewLevelTextBlock.Cursor = Cursors.Hand;
             NewLevelTextBlock.FontWeight = FontWeights.Thin;
             NewLevelTextBlock.TextWrapping = TextWrapping.Wrap;
@@ -122,17 +113,107 @@ namespace ShootEmUpMaker
             NewLevelTextBlock.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
             this.PanelSwitcher.Children.Insert(this.PanelSwitcher.Children.Count - 1, NewLevelTextBlock);
             NewLevelTextBlock.MouseDown += LevelTextBlockMouseDown;
+        }
 
+        void CreateNewLevel(object sender, MouseButtonEventArgs e)
+        {
+            // 
+            int LevelsCount = this.game._levels.Count;
+            ShootEmUpMaker.Level NewLevel = new ShootEmUpMaker.Level() { _number = LevelsCount + 1 };
+            NewLevel._name = String.Format("Level #{0}", NewLevel._number);
+            this.game._levels.Add(NewLevel);
 
-            // Update create level button
-            this.CreateNewLevelButton.Text = "Add another level...";
+            // Add level item to the view
+            this.AddLevelObject(NewLevel);
 
+            // Update create level button and game name text
+            this.UpdateGameNameTextBlock();
+            if (this.game._levels.Count > 0)
+                this.CreateNewLevelButton.Text = "Add another level...";
 
             // Scroll down the PanelSwitcherViewer
             this.PanelSwitcherViewer.ScrollToBottom();
+        }
 
+        void gameNameTextBoxTextChanged(object sender, TextChangedEventArgs e)
+        {
+            this.UpdateGameNameTextBlock();
+        }
 
-            MessageBox.Show(this.game.Name);
+        void UpdateGameNameTextBlock()
+        {
+            String tmp = this.game._levels.Count() > 1 ? "s" : null;
+            String LevelsText = String.Format("{0} level{1}", this.game._levels.Count(), tmp);
+            this.GameNameTexBlock.Text = String.Format("{0} ({1})", this.game._name, LevelsText);
+        }
+
+        private void ExportGameMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Serialization.ExportGame(this.game);
+            MessageBox.Show("Exportation done !", "Export feedback");
+        }
+
+        private void browsePlayerSprite(object sender, RoutedEventArgs e)
+        {
+            var dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.Multiselect = false;
+            dlg.Title = "Select a file";
+
+            if (dlg.ShowDialog() == true)
+            {
+                this.game._player._shipSprite = dlg.FileName;
+                this.playerSpriteTextBox.Text = dlg.FileName;
+            }
+        }
+
+        private void browseWeaponSprite(object sender, RoutedEventArgs e)
+        {
+            var dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.Multiselect = false;
+            dlg.Title = "Select a file";
+
+            if (dlg.ShowDialog() == true)
+            {
+                this.game._player._weaponSprite = dlg.FileName;
+                this.weaponSpriteTextbox.Text = dlg.FileName;
+            }
+        }
+
+        private void browseMenuWallSprite(object sender, RoutedEventArgs e)
+        {
+            var dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.Multiselect = false;
+            dlg.Title = "Select a file";
+
+            if (dlg.ShowDialog() == true)
+            {
+                this.game._wallpaper = dlg.FileName;
+                this.menuWallSpriteTextBox.Text = dlg.FileName;
+            }
+        }
+
+        private void BrowseLevelWall(object sender, RoutedEventArgs e)
+        {
+            var dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.Multiselect = false;
+            dlg.Title = "Select a file";
+
+            if (dlg.ShowDialog() == true)
+            {
+                this.wally.Text = dlg.FileName;
+            }
+        }
+
+        private void BrowseLevelMusic(object sender, RoutedEventArgs e)
+        {
+            var dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.Multiselect = false;
+            dlg.Title = "Select a file";
+
+            if (dlg.ShowDialog() == true)
+            {
+                this.music.Text = dlg.FileName;
+            }
         }
     }
 }

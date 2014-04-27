@@ -10,9 +10,9 @@
                 <RowDefinition Height="30"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <TextBlock Text="Welcome to the Shoot'em up Maker" FontSize="36" FontWeight="Thin" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" TextTrimming="WordEllipsis"  />
-            <TextBlock x:Name="infoTextBlock" FontSize="22" FontWeight="Thin" VerticalAlignment="Bottom" Grid.Row="1" HorizontalAlignment="Center" TextTrimming="WordEllipsis" TextWrapping="Wrap"  ><Run Text="Click "/><Run Language="fr-fr" Text="on"/><Run Language="zh-cn" Text=" "/><Run Language="fr-fr" Text="+ to "/><Run Text="add a new game"/></TextBlock>
-            <ScrollViewer x:Name="ThumbnailsViewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" ToolTip="(Images found will be shown here)" Grid.Row="2">
+            <TextBlock Text="Welcome to the Shoot'em up Maker" FontSize="36" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" TextTrimming="WordEllipsis"  />
+            <TextBlock x:Name="infoTextBlock" FontSize="24" FontWeight="Thin" VerticalAlignment="Bottom" Grid.Row="1" HorizontalAlignment="Center" TextTrimming="WordEllipsis" TextWrapping="Wrap"  ><Run Text="Click "/><Run Language="fr-fr" Text="on"/><Run Language="zh-cn" Text=" "/><Run Language="fr-fr" Text="+ to "/><Run Text="add a new game"/></TextBlock>
+            <ScrollViewer x:Name="ThumbnailsViewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="2">
                 <WrapPanel x:Name="Games" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                     
                     <Border Width="140" Height="260" Margin="5,5" Background="#FF525252">

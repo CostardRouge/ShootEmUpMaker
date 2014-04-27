@@ -2,46 +2,6 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Shoot'em up Maker" Height="725" Width="800">
-    
-    <Window.Resources>
-        <ItemsPanelTemplate x:Key="Banner">
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-        </ItemsPanelTemplate>
-
-        <ControlTemplate x:Key="BannerItem" TargetType="{x:Type ListBoxItem}">
-            <Grid x:Name="grid" Margin="25,0" Width="{TemplateBinding Width}">
-                <VisualStateManager.VisualStateGroups>
-                    <VisualStateGroup x:Name="CommonStates">
-                        <VisualState x:Name="Normal"/>
-                        <VisualState x:Name="MouseOver"/>
-                        <VisualState x:Name="Disabled"/>
-                    </VisualStateGroup>
-                    <VisualStateGroup x:Name="SelectionStates">
-                        <VisualState x:Name="Unselected"/>
-                        <VisualState x:Name="Selected">
-                            <Storyboard>
-                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)" Storyboard.TargetName="label">
-                                    <EasingColorKeyFrame KeyTime="0" Value="Black"/>
-                                </ColorAnimationUsingKeyFrames>
-                            </Storyboard>
-                        </VisualState>
-                        <VisualState x:Name="SelectedUnfocused">
-                            <Storyboard>
-                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)" Storyboard.TargetName="label">
-                                    <EasingColorKeyFrame KeyTime="0" Value="Black"/>
-                                </ColorAnimationUsingKeyFrames>
-                            </Storyboard>
-                        </VisualState>
-                    </VisualStateGroup>
-                    <VisualStateGroup x:Name="FocusStates">
-                        <VisualState x:Name="Unfocused"/>
-                        <VisualState x:Name="Focused"/>
-                    </VisualStateGroup>
-                </VisualStateManager.VisualStateGroups>
-                <Label x:Name="label" Content="{TemplateBinding Content}" Margin="0" Width="{TemplateBinding Width}" FontWeight="Thin" Foreground="White" Cursor="Hand" Background="#00136636" BorderBrush="Black" />
-            </Grid>
-        </ControlTemplate>
-    </Window.Resources>
 
     <DockPanel LastChildFill="True" Background="#FFECECEC">
         <Grid DockPanel.Dock="Top" Background="#FFCD3737" Height="48">
@@ -49,13 +9,14 @@
                 <ColumnDefinition Width="384"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
+            
             <Border BorderBrush="#FFA41818" BorderThickness="0,0,0,1">
-                <TextBlock x:Name="GameNameTexBlock" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Padding="10,0,5,0" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" FontWeight="Thin" >Your game title is here (5 levels)</TextBlock>
+                <TextBlock x:Name="GameNameTexBlock" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Padding="10,0,5,0" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" FontWeight="Thin"  Text="{Binding Path=Text, ElementName=gameNameTextBox}" >Your game title is here (5 levels)</TextBlock>
             </Border>
-            <ListBox SelectedIndex="0" BorderBrush="#FFA41818" BorderThickness="0,0,0,1" ItemsPanel="{DynamicResource Banner}" Height="48" Grid.ColumnSpan="2" Grid.Column="1" Background="{x:Null}">
-                <ListBoxItem Content="Preview game" Template="{DynamicResource BannerItem}" ToolTip="Preview the current game..." ></ListBoxItem>
-                <ListBoxItem Content="Export game" Template="{DynamicResource BannerItem}" ToolTip="Export the current game..." ></ListBoxItem>
-            </ListBox>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <TextBlock Visibility="Hidden" HorizontalAlignment="Right" Margin="10,0" FontSize="16" Foreground="White" FontWeight="Thin">Preview game</TextBlock>
+                <TextBlock MouseDown="ExportGameMouseDown" HorizontalAlignment="Right" Margin="10,0" FontSize="16" Foreground="White" FontWeight="Thin">Export the game</TextBlock>
+            </StackPanel>
         </Grid>
 
         <ScrollViewer x:Name="PanelSwitcherViewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible" Padding="0,0,0,5" Background="White" Width="172">
@@ -63,19 +24,19 @@
                 <TextBlock
                         x:Name="GeneralSettingsTextBlock"
                         Text="Game general settings" VerticalAlignment="Center" Background="#FF525252"
-                        ToolTip="Click here to create a new game" FontSize="18"  Cursor="Hand"
+                        ToolTip="Click here to edit the game general settings" FontSize="18"  Cursor="Hand"
                         Foreground="White" FontWeight="Thin" Height="160" Margin="5,5,5,0" TextWrapping="Wrap" Padding="10,20"/>
 
                 <TextBlock
                         x:Name="MenuAndPlayerTextBlock"
                         Text="Menu and player settings" VerticalAlignment="Center" Background="#FF525252"
-                        ToolTip="Click here to create a new game" FontSize="18"  Cursor="Hand"
+                        ToolTip="Click here to edit the menu and player settings" FontSize="18"  Cursor="Hand"
                         Foreground="White" FontWeight="Thin" Height="160" Margin="5,5,5,0" TextWrapping="Wrap" Padding="10,20"/>
               
                 <TextBlock
                         x:Name="CreateNewLevelButton"
                         Text="Add the first level..." VerticalAlignment="Center" Background="#FF525252"
-                        ToolTip="Click here to create a new game" FontSize="18"  Cursor="Hand"
+                        ToolTip="Click here to add a new level" FontSize="18"  Cursor="Hand"
                         Foreground="White" FontWeight="Thin" Height="160" Margin="5,5,5,0" TextWrapping="Wrap" Padding="10,20"/>
 
             </StackPanel>
@@ -83,58 +44,76 @@
         </ScrollViewer>
         
         <Grid x:Name="Panels">
-            <Label Visibility="Visible" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Thin" FontSize="36">
-                Create your own Shoot'em up game :)
-            </Label>
+            <TextBlock x:Name="HomePageTextBlock" Visibility="Visible" VerticalAlignment="Center" FontSize="36" TextWrapping="Wrap" HorizontalAlignment="Center" Margin="0,0,0,192">
+               <Run>Create your own Shoot'em up game :)</Run>
+               <Run FontWeight="Thin" FontSize="24">Start by editing your game general settings...</Run>
+            </TextBlock>
 
-            <StackPanel DataContext="{Binding myBinding}" x:Name="GeneralSettingsPanel" Visibility="Hidden" Margin="100,0">
+            <StackPanel x:Name="GeneralSettingsPanel" Visibility="Hidden" Margin="100,0">
                 <Label HorizontalAlignment="Center" VerticalAlignment="Center">
                     Game name :
                 </Label>
-<<<<<<< HEAD
-=======
-
->>>>>>> 9e967112880e356e74c3157615a5bb0809b18ed8
-                <TextBox x:Name="gameNameTextBox" />
+                <TextBox x:Name="gameNameTextBox" Text="{Binding _name, UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label HorizontalAlignment="Center" VerticalAlignment="Center">
                     Game description :
                 </Label>
-                <TextBox x:Name="gameDescriptionTextbox" />
+                <TextBox x:Name="gameDescriptionTextbox" Text="{Binding _description, UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label HorizontalAlignment="Center" VerticalAlignment="Center">
                     Game author :
                 </Label>
-                <TextBox x:Name="gameAuthorTextbox" />
+                <TextBox x:Name="gameAuthorTextbox" Text="{Binding _author, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
 
             <StackPanel x:Name="MenuAndPlayerPanel" Visibility="Hidden" Margin="100,0">
                 <Label HorizontalAlignment="Center" VerticalAlignment="Center">
+                    Menu wall sprite :
+                </Label>
+                <TextBox x:Name="menuWallSpriteTextBox" Text="{Binding Path=_wallpaper, UpdateSourceTrigger=PropertyChanged}" />
+                <Button Click="browseMenuWallSprite" Content="Browse"/>
+
+                <Label HorizontalAlignment="Center" VerticalAlignment="Center">
                     Player sprite :
                 </Label>
-                <TextBox x:Name="playerSpriteTextBox" />
+                <TextBox x:Name="playerSpriteTextBox" Text="{Binding Path=_player._shipSprite, UpdateSourceTrigger=PropertyChanged}" />
+                <Button Click="browsePlayerSprite" Content="Browse"/>
 
                 <Label HorizontalAlignment="Center" VerticalAlignment="Center">
                     Weapon sprite :
                 </Label>
-                <TextBox x:Name="weaponSpriteTextbox" />
+                <TextBox x:Name="weaponSpriteTextbox" Text="{Binding _player._weaponSprite, UpdateSourceTrigger=PropertyChanged}" />
+                <Button Click="browseWeaponSprite" Content="Browse"/>
 
                 <Label HorizontalAlignment="Center" VerticalAlignment="Center">
                     Player life :
                 </Label>
-                <TextBox x:Name="playerLifeTextbox" />
-            </StackPanel>
+                <TextBox x:Name="playerLifeTextbox" Text="{Binding  _player._life, UpdateSourceTrigger=PropertyChanged}"  />
+               </StackPanel>
 
             <StackPanel x:Name="LevelPanel" Visibility="Hidden" Margin="100,0">
                 <Label HorizontalAlignment="Center" VerticalAlignment="Center">
                     Level name :
                 </Label>
-                <TextBox x:Name="levelNameTextBox" />
+                <TextBox x:Name="levelNameTextBox" Text="{Binding Path=_name, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <Label HorizontalAlignment="Center" VerticalAlignment="Center">
                     Level description :
                 </Label>
-                <TextBox x:Name="levelDescriptionTextbox" />
+                <TextBox x:Name="levelDescriptionTextbox" Text="{Binding Path=_description, UpdateSourceTrigger=PropertyChanged}" />
+
+                <Label HorizontalAlignment="Center" VerticalAlignment="Center">
+                    Wall sprite :
+                </Label>
+                <TextBox x:Name="wally" Text="{Binding _wallpaper, UpdateSourceTrigger=PropertyChanged}" />
+                <Button Click="BrowseLevelWall" Content="Browse"/>
+
+                <Label HorizontalAlignment="Center" VerticalAlignment="Center">
+                    music :
+                </Label>
+                <TextBox x:Name="music" Text="{Binding _music, UpdateSourceTrigger=PropertyChanged}" />
+                <Button Click="BrowseLevelMusic" Content="Browse"/>
+
             </StackPanel>
         </Grid>
 

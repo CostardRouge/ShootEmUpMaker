@@ -36,6 +36,7 @@ namespace ShootEmUpMaker
         public void makerWindowClosed(object sender, EventArgs e)
         {
             this.makerWindow = null;
+            this.welcomeWindow.ClearCreatedGameCards();
             this.welcomeWindow.LoadCreatedGames();
             this.welcomeWindow.Show();
         }
