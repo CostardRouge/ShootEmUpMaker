@@ -2,9 +2,9 @@ Shoot'em up Maker
 ====
 > A game tool project for BJTU.
 
+![Example](Assets/0.PNG "(screenshoot)")
 ![Example](Assets/1.PNG "(screenshoot)")
 ![Example](Assets/2.PNG "(screenshoot)")
-![Example](Assets/3.PNG "(screenshoot)")
 
 ### How to use the Maker
 
@@ -18,4 +18,4 @@ Shoot'em up Maker
 * Steeve Pommier ([Github](https://github.com/CostardRouge) / [Website](https://costardrouge.eu))
 * Juju013 ([Github](https://github.com/Juju013))
 * alex-ng ([Github](https://github.com/alex-ng))
-* dagasa_c ([Github](https://github.com/dagasa_c))
+* dagasa_c ([Github](https://github.com/Dagasan))
